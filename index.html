@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Art Xu — therapy for complex trauma, attachment, and inner child healing in San Francisco. Step into the office." />
+  <title>Art Xu — A Quiet Room by the Bay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-time="day">
+
+  <header id="site-header">
+    <div class="wordmark">
+      <span class="wordmark-name">Art's Therapy Office</span>
+      <span class="wordmark-sub">Welcome! Feel free to explore. </span>
+    </div>
+  </header>
+
+  <main id="scene-wrap">
+    <div id="room-frame">
+      <p id="room-hint">✦ Please, have a seat on <b>the couch</b> ✦</p>
+      <svg id="room" viewBox="0 0 720 900" role="img"
+           aria-label="An illustrated therapy office: a curtained window above the couch looking out at the Golden Gate Bridge, a framed diploma, a bookshelf, a plant shelf, a wall calendar, a side table with steaming tea, and a sleeping cat">
+        <defs>
+          <!-- soft paper grain -->
+          <filter id="grain" x="-5%" y="-5%" width="110%" height="110%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" result="n"/>
+            <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.035 0" result="g"/>
+            <feComposite in="g" in2="SourceGraphic" operator="over"/>
+          </filter>
+          <filter id="softglow" x="-40%" y="-40%" width="180%" height="180%">
+            <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#e8b76a" flood-opacity="0.85"/>
+          </filter>
+          <clipPath id="winclip"><rect x="256" y="176" width="208" height="248"/></clipPath>
+          <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#efe7d7"/>
+            <stop offset="1" stop-color="#e5dac5"/>
+          </linearGradient>
+          <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#d7b985"/>
+            <stop offset="1" stop-color="#c9a874"/>
+          </linearGradient>
+          <!-- time-of-day skies (swapped via CSS classes on body) -->
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" class="sky-top"/>
+            <stop offset="1" class="sky-bottom"/>
+          </linearGradient>
+          <linearGradient id="oceanG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" class="ocean-top"/>
+            <stop offset="1" class="ocean-bottom"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ======================= ROOM SHELL ======================= -->
+        <rect x="0" y="0" width="720" height="660" fill="url(#wall)"/>
+        <rect x="0" y="660" width="720" height="240" fill="url(#floor)"/>
+        <rect x="0" y="646" width="720" height="16" rx="3" fill="#b99a63"/>
+        <!-- floorboards -->
+        <g stroke="#b0955f" stroke-width="2" opacity="0.6">
+          <line x1="0" y1="700" x2="720" y2="700"/>
+          <line x1="0" y1="750" x2="720" y2="750"/>
+          <line x1="0" y1="800" x2="720" y2="800"/>
+          <line x1="0" y1="850" x2="720" y2="850"/>
+          <line x1="140" y1="662" x2="126" y2="700"/><line x1="480" y1="662" x2="466" y2="700"/>
+          <line x1="300" y1="700" x2="284" y2="750"/><line x1="620" y1="700" x2="606" y2="750"/>
+          <line x1="180" y1="750" x2="164" y2="800"/><line x1="500" y1="750" x2="486" y2="800"/>
+          <line x1="340" y1="800" x2="324" y2="850"/><line x1="660" y1="800" x2="646" y2="850"/>
+        </g>
+
+        <!-- ======================= WINDOW WITH CURTAINS (above couch, click to open) ======================= -->
+        <g id="hs-window" class="hotspot" tabindex="0" role="button" aria-label="The window — click to open the curtains">
+          <!-- frame -->
+          <rect x="240" y="160" width="240" height="288" rx="6" fill="#c9a26b"/>
+          <rect x="250" y="170" width="220" height="260" fill="#b08a55"/>
+          <!-- the view -->
+          <g clip-path="url(#winclip)">
+            <rect x="256" y="176" width="208" height="248" fill="url(#sky)"/>
+            <g id="stars" class="night-only">
+              <circle cx="280" cy="196" r="1.8" fill="#fdf6d8"/><circle cx="322" cy="184" r="1.4" fill="#fdf6d8"/>
+              <circle cx="362" cy="204" r="1.8" fill="#fdf6d8"/><circle cx="402" cy="188" r="1.4" fill="#fdf6d8"/>
+              <circle cx="442" cy="208" r="1.6" fill="#fdf6d8"/><circle cx="300" cy="232" r="1.4" fill="#fdf6d8"/>
+              <circle cx="430" cy="240" r="1.5" fill="#fdf6d8"/><circle cx="372" cy="252" r="1.3" fill="#fdf6d8"/>
+            </g>
+            <circle id="sunmoon" cx="302" cy="216" r="16"/>
+            <g class="cloud cloud-slow">
+              <ellipse cx="310" cy="206" rx="27" ry="9" fill="#ffffff" opacity="0.85"/>
+              <ellipse cx="293" cy="200" rx="14" ry="6.5" fill="#ffffff" opacity="0.85"/>
+              <ellipse cx="326" cy="199" rx="15" ry="7" fill="#ffffff" opacity="0.85"/>
+            </g>
+            <g class="cloud cloud-fast">
+              <ellipse cx="420" cy="188" rx="21" ry="7" fill="#ffffff" opacity="0.7"/>
+              <ellipse cx="407" cy="183" rx="11" ry="5" fill="#ffffff" opacity="0.7"/>
+            </g>
+            <!-- ocean -->
+            <rect x="256" y="330" width="208" height="94" fill="url(#oceanG)"/>
+            <path class="wave" d="M232 342 Q 256 338 280 342 T 328 342 T 376 342 T 424 342 T 472 342 T 520 342" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.5"/>
+            <path class="wave wave-2" d="M232 366 Q 258 362 284 366 T 336 366 T 388 366 T 440 366 T 492 366" fill="none" stroke="#ffffff" stroke-width="1.4" opacity="0.35"/>
+            <path class="wave wave-3" d="M232 392 Q 260 388 288 392 T 344 392 T 400 392 T 456 392 T 512 392" fill="none" stroke="#ffffff" stroke-width="1.3" opacity="0.28"/>
+            <!-- golden gate bridge -->
+            <g id="bridge" fill="#c0472b">
+              <rect x="256" y="322" width="208" height="5"/>
+              <rect x="304" y="254" width="9" height="70"/>
+              <rect x="299" y="264" width="19" height="5"/>
+              <rect x="299" y="290" width="19" height="5"/>
+              <rect x="404" y="254" width="9" height="70"/>
+              <rect x="399" y="264" width="19" height="5"/>
+              <rect x="399" y="290" width="19" height="5"/>
+              <path d="M256 280 Q 280 318 308 262" fill="none" stroke="#c0472b" stroke-width="3.5"/>
+              <path d="M308 262 Q 358 316 408 262" fill="none" stroke="#c0472b" stroke-width="3.5"/>
+              <path d="M408 262 Q 434 316 464 284" fill="none" stroke="#c0472b" stroke-width="3.5"/>
+              <g stroke="#c0472b" stroke-width="1.6">
+                <line x1="332" y1="292" x2="332" y2="322"/><line x1="358" y1="302" x2="358" y2="322"/>
+                <line x1="384" y1="292" x2="384" y2="322"/><line x1="280" y1="300" x2="280" y2="322"/>
+                <line x1="434" y1="298" x2="434" y2="322"/>
+              </g>
+            </g>
+          </g>
+          <!-- casement sashes (open on second click) -->
+          <g class="sash" id="sash-l">
+            <rect x="256" y="176" width="104" height="248" fill="#ffffff" opacity="0.10"/>
+            <rect x="256" y="176" width="104" height="248" fill="none" stroke="#c9a26b" stroke-width="6"/>
+            <line x1="308" y1="176" x2="308" y2="424" stroke="#c9a26b" stroke-width="3"/>
+            <line x1="256" y1="300" x2="360" y2="300" stroke="#c9a26b" stroke-width="3"/>
+          </g>
+          <g class="sash" id="sash-r">
+            <rect x="360" y="176" width="104" height="248" fill="#ffffff" opacity="0.10"/>
+            <rect x="360" y="176" width="104" height="248" fill="none" stroke="#c9a26b" stroke-width="6"/>
+            <line x1="412" y1="176" x2="412" y2="424" stroke="#c9a26b" stroke-width="3"/>
+            <line x1="360" y1="300" x2="464" y2="300" stroke="#c9a26b" stroke-width="3"/>
+          </g>
+          <!-- sill -->
+          <rect x="232" y="444" width="256" height="12" rx="4" fill="#c9a26b"/>
+          <!-- curtain rod -->
+          <rect x="222" y="146" width="276" height="8" rx="4" fill="#9c7943"/>
+          <circle cx="222" cy="150" r="6" fill="#9c7943"/><circle cx="498" cy="150" r="6" fill="#9c7943"/>
+          <!-- curtains (open on first click) -->
+          <g class="curtain" id="curtain-l">
+            <path d="M238 154 h126 v290 q-32 8 -63 0 q-32 8 -63 0 z" fill="#cf8a6b"/>
+            <path d="M262 158 q-4 140 2 282 M288 158 q4 140 -2 282 M314 158 q-4 140 2 282 M340 158 q4 140 -2 282" stroke="#b97a5c" stroke-width="2.5" fill="none" opacity="0.6"/>
+          </g>
+          <g class="curtain" id="curtain-r">
+            <path d="M482 154 h-126 v290 q32 8 63 0 q32 8 63 0 z" fill="#cf8a6b"/>
+            <path d="M380 158 q4 140 -2 282 M406 158 q-4 140 2 282 M432 158 q4 140 -2 282 M458 158 q-4 140 2 282" stroke="#b97a5c" stroke-width="2.5" fill="none" opacity="0.6"/>
+          </g>
+        </g>
+
+        <!-- ======================= PLANT SHELF (Services) ======================= -->
+        <g transform="translate(6,190) scale(0.85)">
+        <g id="hs-services" class="hotspot" tabindex="0" role="button" aria-label="Services — shelf of plants and small figures">
+          <rect x="30" y="228" width="196" height="12" rx="4" fill="#b0834b"/>
+          <path d="M46 240 l0 14 M206 240 l0 14" stroke="#9c7943" stroke-width="6"/>
+          <!-- buddha figure -->
+          <g id="buddha">
+            <ellipse cx="66" cy="224" rx="15" ry="10" fill="#9d8b66"/>
+            <circle cx="66" cy="206" r="9" fill="#b3a077"/>
+            <circle cx="66" cy="196" r="6.5" fill="#b3a077"/>
+            <ellipse cx="66" cy="228" rx="18" ry="5" fill="#8b7a58"/>
+          </g>
+          <!-- potted fern -->
+          <g class="sway" style="transform-origin: 128px 226px;">
+            <path d="M128 222 C 112 206 104 188 108 172 C 118 186 124 202 128 222" fill="#6e8f68"/>
+            <path d="M128 222 C 144 206 152 188 148 172 C 138 186 132 202 128 222" fill="#7d9c74"/>
+            <path d="M128 222 C 126 200 126 184 128 168 C 132 184 132 202 128 222" fill="#5d7f59"/>
+          </g>
+          <path d="M114 222 h28 l-4 18 h-20 z" fill="#b96a45"/>
+          <!-- trailing pothos -->
+          <g class="sway-slow" style="transform-origin: 186px 226px;">
+            <path d="M186 224 C 178 236 174 252 178 268" fill="none" stroke="#6e8f68" stroke-width="3"/>
+            <path d="M196 224 C 200 240 198 258 192 274" fill="none" stroke="#7d9c74" stroke-width="3"/>
+            <ellipse cx="177" cy="244" rx="6" ry="4" fill="#6e8f68"/>
+            <ellipse cx="179" cy="262" rx="6" ry="4" fill="#7d9c74"/>
+            <ellipse cx="199" cy="244" rx="6" ry="4" fill="#7d9c74"/>
+            <ellipse cx="193" cy="266" rx="6" ry="4" fill="#6e8f68"/>
+          </g>
+          <path d="M176 212 h24 l-3 14 h-18 z" fill="#8b5e46"/>
+          <!-- incense curl -->
+          <g class="steam">
+            <path d="M96 216 C 92 208 100 202 96 194 C 92 186 100 180 97 172" fill="none" stroke="#c9bda0" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <rect x="90" y="216" width="12" height="6" rx="3" fill="#7a6a4e"/>
+        </g>
+        </g>
+
+        <!-- ======================= BOOKSHELF (Blog) ======================= -->
+        <g transform="translate(510,162) scale(0.85)">
+        <g id="hs-blog" class="hotspot" tabindex="0" role="button" aria-label="Writing — a redwood bookshelf of articles">
+          <rect x="34" y="306" width="192" height="278" rx="6" fill="#b0834b"/>
+          <rect x="46" y="318" width="168" height="70" fill="#8f6a3b"/>
+          <rect x="46" y="400" width="168" height="70" fill="#8f6a3b"/>
+          <rect x="46" y="482" width="168" height="70" fill="#8f6a3b"/>
+          <!-- books row 1 -->
+          <g>
+            <rect x="52" y="330" width="14" height="58" fill="#87a084"/>
+            <rect x="68" y="336" width="12" height="52" fill="#c0472b"/>
+            <rect x="82" y="326" width="16" height="62" fill="#5b7d8f"/>
+            <rect x="100" y="338" width="12" height="50" fill="#d8b25f"/>
+            <rect x="114" y="330" width="14" height="58" fill="#8a6a8f"/>
+            <rect x="130" y="342" width="30" height="46" fill="#a8552f" transform="rotate(8 145 365)"/>
+            <rect x="168" y="334" width="13" height="54" fill="#6e8f68"/>
+            <rect x="183" y="340" width="12" height="48" fill="#b98a4e"/>
+          </g>
+          <!-- books row 2 -->
+          <g>
+            <rect x="52" y="416" width="13" height="54" fill="#c0472b"/>
+            <rect x="67" y="410" width="15" height="60" fill="#5b7d8f"/>
+            <rect x="84" y="420" width="12" height="50" fill="#87a084"/>
+            <rect x="98" y="414" width="14" height="56" fill="#d8b25f"/>
+            <!-- stacked books -->
+            <rect x="122" y="452" width="52" height="10" rx="2" fill="#8a6a8f"/>
+            <rect x="126" y="440" width="46" height="10" rx="2" fill="#6e8f68"/>
+            <rect x="130" y="428" width="40" height="10" rx="2" fill="#b96a45"/>
+            <!-- small plant -->
+            <path d="M192 448 C 188 436 190 428 194 420 C 198 428 200 438 196 448" fill="#7d9c74"/>
+            <path d="M188 452 h14 l-2 14 h-10 z" fill="#9d7a5a"/>
+          </g>
+          <!-- books row 3 -->
+          <g>
+            <rect x="54" y="496" width="15" height="54" fill="#5b7d8f"/>
+            <rect x="71" y="502" width="12" height="48" fill="#d8b25f"/>
+            <rect x="85" y="492" width="14" height="58" fill="#6e8f68"/>
+            <rect x="101" y="500" width="13" height="50" fill="#c0472b"/>
+            <rect x="116" y="494" width="14" height="56" fill="#87a084"/>
+            <rect x="132" y="504" width="12" height="46" fill="#8a6a8f"/>
+            <rect x="146" y="498" width="15" height="52" fill="#b98a4e"/>
+            <rect x="166" y="506" width="30" height="44" fill="#5b7d8f" transform="rotate(-9 181 528)"/>
+          </g>
+        </g>
+        </g>
+
+        <!-- ======================= COUCH (Welcome) ======================= -->
+        <g transform="translate(-82,100)">
+        <g class="couch-nudge">
+        <g id="hs-welcome" class="hotspot" tabindex="0" role="button" aria-label="Welcome — the couch. Opens a welcome note">
+          <!-- back -->
+          <rect x="292" y="380" width="300" height="120" rx="26" fill="#7a9376"/>
+          <!-- arms -->
+          <rect x="272" y="428" width="52" height="140" rx="22" fill="#87a084"/>
+          <rect x="560" y="428" width="52" height="140" rx="22" fill="#87a084"/>
+          <!-- seat -->
+          <rect x="308" y="480" width="268" height="60" rx="16" fill="#8fae8b"/>
+          <rect x="300" y="524" width="284" height="44" rx="14" fill="#7a9376"/>
+          <!-- pillows -->
+          <rect x="330" y="420" width="66" height="62" rx="14" fill="#5b7d8f" transform="rotate(-6 363 451)"/>
+          <rect x="484" y="420" width="66" height="62" rx="14" fill="#c07a4e" transform="rotate(5 517 451)"/>
+          <!-- folded blanket -->
+          <path d="M420 470 h80 q6 0 6 8 v6 h-92 v-6 q0 -8 6 -8" fill="#d8c9a4"/>
+          <!-- legs -->
+          <rect x="296" y="568" width="14" height="18" rx="4" fill="#8f6a3b"/>
+          <rect x="574" y="568" width="14" height="18" rx="4" fill="#8f6a3b"/>
+        </g>
+        </g>
+        </g>
+
+        <!-- ======================= BIRD (flies in when the window opens) ======================= -->
+        <g id="bird" aria-hidden="true">
+          <path d="M446 480 l-2 4 M452 480 l2 4" stroke="#8a6a3f" stroke-width="1.6" stroke-linecap="round"/>
+          <ellipse cx="449" cy="471" rx="10" ry="7.5" fill="#5b7d8f"/>
+          <path d="M439 470 l-8 6 8 2 z" fill="#4a6a7c"/>
+          <path class="wing" d="M445 468 q-8 -3 -12 3 q6 5 13 2 z" fill="#4a6a7c"/>
+          <circle cx="457" cy="463" r="5.5" fill="#5b7d8f"/>
+          <ellipse cx="453" cy="470" rx="4.5" ry="3.5" fill="#f2e9d4"/>
+          <circle cx="459" cy="462" r="1.2" fill="#1e2a30"/>
+          <path d="M462 464 l6 1.5 -6 1.5 z" fill="#e8b76a"/>
+        </g>
+
+        <!-- ======================= DIPLOMA (About, left wall) ======================= -->
+        <g transform="translate(-521,40)">
+        <g id="hs-about" class="hotspot" tabindex="0" role="button" aria-label="About Art — the diploma on the wall">
+          <rect x="576" y="140" width="124" height="96" rx="5" fill="#9c7943"/>
+          <rect x="583" y="147" width="110" height="82" fill="#f6efdd" stroke="#c3b28c" stroke-width="2"/>
+          <g stroke="#b7a988" stroke-width="2.4" stroke-linecap="round">
+            <line x1="596" y1="164" x2="680" y2="164"/>
+            <line x1="604" y1="176" x2="672" y2="176"/>
+          </g>
+          <rect x="608" y="188" width="60" height="4.5" rx="2" fill="#59503f"/>
+          <g stroke="#b7a988" stroke-width="2" stroke-linecap="round">
+            <line x1="600" y1="204" x2="652" y2="204"/>
+            <line x1="600" y1="214" x2="640" y2="214"/>
+          </g>
+          <circle cx="672" cy="210" r="9" fill="#c0472b"/>
+          <circle cx="672" cy="210" r="4.5" fill="none" stroke="#e8b76a" stroke-width="1.6"/>
+          <path d="M668 218 l-5 11 4 -2 3 5 z M676 218 l5 11 -4 -2 -3 5 z" fill="#c0472b"/>
+        </g>
+        </g>
+
+        <!-- ======================= WALL CALENDAR (Contact) ======================= -->
+        <g transform="translate(20,-92)">
+        <g id="hs-contact" class="hotspot" tabindex="0" role="button" aria-label="Contact — the calendar on the wall">
+          <circle cx="618" cy="242" r="4" fill="#59503f"/>
+          <path d="M618 244 L582 272 M618 244 L654 272" stroke="#8a7a5e" stroke-width="2" fill="none"/>
+          <rect x="560" y="272" width="116" height="128" rx="6" fill="#f6efdd" stroke="#c3b28c" stroke-width="2"/>
+          <path d="M566 272 h104 a6 6 0 0 1 6 6 v22 h-116 v-22 a6 6 0 0 1 6 -6" fill="#c0472b"/>
+          <circle cx="586" cy="272" r="4.5" fill="none" stroke="#59503f" stroke-width="2.5"/>
+          <circle cx="650" cy="272" r="4.5" fill="none" stroke="#59503f" stroke-width="2.5"/>
+          <text id="cal-month" x="618" y="294" text-anchor="middle" font-size="15" letter-spacing="3" fill="#f6efdd" font-family="Nunito, sans-serif" font-weight="700">JULY</text>
+          <g fill="none" stroke="#d8cba6" stroke-width="1.8">
+            <rect x="570" y="308" width="14" height="14" rx="2"/><rect x="591" y="308" width="14" height="14" rx="2"/>
+            <rect x="612" y="308" width="14" height="14" rx="2"/><rect x="633" y="308" width="14" height="14" rx="2"/>
+            <rect x="654" y="308" width="14" height="14" rx="2"/>
+            <rect x="570" y="332" width="14" height="14" rx="2"/><rect x="591" y="332" width="14" height="14" rx="2"/>
+            <rect x="612" y="332" width="14" height="14" rx="2"/><rect x="633" y="332" width="14" height="14" rx="2"/>
+            <rect x="654" y="332" width="14" height="14" rx="2"/>
+            <rect x="570" y="356" width="14" height="14" rx="2"/><rect x="591" y="356" width="14" height="14" rx="2"/>
+            <rect x="612" y="356" width="14" height="14" rx="2"/><rect x="633" y="356" width="14" height="14" rx="2"/>
+            <rect x="654" y="356" width="14" height="14" rx="2"/>
+          </g>
+          <path d="M573 311 l8 8 M581 311 l-8 8 M594 335 l8 8 M602 335 l-8 8" stroke="#b7a988" stroke-width="1.8"/>
+          <circle id="cal-today" cx="640" cy="339" r="11" fill="none" stroke="#c0472b" stroke-width="2.5"/>
+        </g>
+        </g>
+
+        <!-- ======================= RUG with yin-yang center ======================= -->
+        <ellipse cx="360" cy="790" rx="240" ry="62" fill="#c98f6f"/>
+        <ellipse cx="360" cy="790" rx="204" ry="50" fill="#dcb197" />
+        <ellipse cx="360" cy="790" rx="144" ry="36" fill="#c98f6f"/>
+        <ellipse cx="360" cy="790" rx="77" ry="20" fill="#dcb197"/>
+        <!-- yin-yang at rug center -->
+        <g opacity="0.55" transform="translate(360 790) scale(1.3 0.55)">
+          <circle r="16" fill="#f2e9d4"/>
+          <path d="M0 -16 a16 16 0 0 1 0 32 a8 8 0 0 1 0 -16 a8 8 0 0 0 0 -16" fill="#59503f"/>
+          <circle cy="-8" r="2.6" fill="#59503f"/><circle cy="8" r="2.6" fill="#f2e9d4"/>
+        </g>
+
+        <!-- couch side table with tea -->
+        <g id="sidetable">
+          <ellipse cx="140" cy="588" rx="46" ry="11" fill="#c9a26b"/>
+          <rect x="94" y="588" width="92" height="9" fill="#b0834b"/>
+          <rect x="133" y="597" width="14" height="66" fill="#9c7943"/>
+          <ellipse cx="140" cy="667" rx="30" ry="7" fill="#9c7943"/>
+          <g id="tea" transform="translate(-606,102)">
+            <g class="steam">
+              <path d="M736 452 C 732 444 740 438 736 430" fill="none" stroke="#cdbfa2" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M746 454 C 743 447 749 442 746 435" fill="none" stroke="#cdbfa2" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <path d="M726 458 h30 a4 4 0 0 1 4 4 q0 16 -19 16 q-19 0 -19 -16 a4 4 0 0 1 4 -4" fill="#f2e9d4"/>
+            <path d="M760 462 q10 2 6 10 q-3 6 -10 4" fill="none" stroke="#f2e9d4" stroke-width="4"/>
+            <ellipse cx="741" cy="482" rx="16" ry="3" fill="#d8c9a4"/>
+          </g>
+        </g>
+
+        <!-- ======================= FLOOR PLANT (foreground, right) ======================= -->
+        <g transform="translate(-100,324) scale(0.9)">
+          <g id="floorplant" class="sway-slow" style="transform-origin: 830px 560px;">
+            <path d="M830 540 C 800 500 786 460 796 424 C 816 456 826 500 830 540" fill="#5d7f59"/>
+            <path d="M830 540 C 860 500 874 460 864 424 C 844 456 834 500 830 540" fill="#6e8f68"/>
+            <path d="M830 540 C 824 496 824 452 830 416 C 838 452 838 500 830 540" fill="#7d9c74"/>
+            <path d="M830 542 C 812 516 800 490 798 464 C 814 486 824 516 830 542" fill="#87a084"/>
+          </g>
+          <path d="M806 540 h48 l-7 34 h-34 z" fill="#b96a45"/>
+          <path d="M806 540 h48 l-2 10 h-44 z" fill="#a8552f"/>
+        </g>
+
+        <!-- ======================= CAT (easter egg) ======================= -->
+        <g transform="translate(-95,127)">
+        <g id="hs-cat" class="hotspot hotspot-soft" tabindex="0" role="button" aria-label="Boston the cat, asleep on the rug">
+          <ellipse cx="350" cy="668" rx="44" ry="20" fill="#2f2b29"/>
+          <!-- white chest/belly patch -->
+          <path d="M318 672 q16 12 36 8 q10 -2 12 -10 q-24 8 -48 2" fill="#f2ede3"/>
+          <circle cx="316" cy="658" r="16" fill="#38332f"/>
+          <path d="M304 648 l-4 -12 8 4 z M322 646 l2 -13 6 8 z" fill="#38332f"/>
+          <!-- white muzzle -->
+          <path d="M302 662 q7 9 20 7 q6 -1 7 -7 q-14 5 -27 0" fill="#f2ede3"/>
+          <!-- white paw tips -->
+          <ellipse cx="330" cy="684" rx="7" ry="4" fill="#f2ede3"/>
+          <ellipse cx="348" cy="686" rx="7" ry="4" fill="#f2ede3"/>
+          <path class="eyes-closed" d="M308 660 q3 3 6 0 M318 660 q3 3 6 0" stroke="#141210" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          <g class="eyes-open">
+            <circle cx="311" cy="659" r="2.2" fill="#9dc08a"/><circle cx="321" cy="659" r="2.2" fill="#9dc08a"/>
+            <circle cx="311" cy="659" r="1" fill="#141210"/><circle cx="321" cy="659" r="1" fill="#141210"/>
+          </g>
+          <path d="M311 667 q4 3 9 0" stroke="#8c7a6a" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <g class="tail" style="transform-origin: 390px 668px;">
+            <path d="M390 668 q26 -4 28 -26" fill="none" stroke="#2f2b29" stroke-width="10" stroke-linecap="round"/>
+            <circle cx="418" cy="642" r="5" fill="#f2ede3"/>
+          </g>
+          <g class="zzz" fill="#7a6a4e" font-family="serif" font-style="italic">
+            <text x="300" y="628" font-size="14">z</text>
+            <text x="312" y="614" font-size="11">z</text>
+          </g>
+        </g>
+        </g>
+
+        <!-- grain overlay -->
+        <rect x="0" y="0" width="720" height="900" filter="url(#grain)" fill="transparent" pointer-events="none"/>
+      </svg>
+
+      <div id="hotspot-label" role="status" aria-hidden="true"></div>
+    </div>
+
+    <nav id="icon-nav" aria-label="Site sections">
+      <button data-panel="about"><span class="nav-icon" aria-hidden="true">📜</span>About</button>
+      <button data-panel="services"><span class="nav-icon" aria-hidden="true">🪴</span>Services &amp; Fees</button>
+      <button data-panel="blog"><span class="nav-icon" aria-hidden="true">📚</span>Writing</button>
+      <button data-panel="contact"><span class="nav-icon" aria-hidden="true">📅</span>Contact</button>
+    </nav>
+  </main>
+
+  <!-- ======================= OVERLAY ======================= -->
+  <div id="overlay" hidden>
+    <div id="overlay-scrim"></div>
+    <section id="overlay-card" role="dialog" aria-modal="true" aria-labelledby="overlay-title" tabindex="-1">
+      <button id="overlay-close" aria-label="Close">×</button>
+      <div id="overlay-content"></div>
+    </section>
+  </div>
+
+  <!-- ======================= PANEL CONTENT ======================= -->
+  <template id="panel-welcome">
+    <h2 id="overlay-title">Let's make room to breathe.</h2>
+    <p class="lede">Come on in — I'm glad you found your way here.</p>
+    <p>Hi, I'm Art 👋 — a therapist working with complex developmental trauma, attachment, and inner child healing. In person in San Francisco and online across California.</p>
+    <p>You don't need the right words or a tidy story — wherever you're starting from is a fine place to start. Poke around the room to learn how I work: the diploma, the plants, the bookshelf, and the calendar all open. (The cat is just the cat.)</p>
+    <div class="welcome-actions">
+      <button class="btn-primary" data-panel="contact">Book a free 20-min consult</button>
+      <button class="btn-link" data-panel="services">See how I work →</button>
+    </div>
+  </template>
+
+  <template id="panel-about">
+    <h2 id="overlay-title">About Me</h2>
+    <p class="lede">Hi, I'm Art. I believe the wounds we carry from early life were made in relationship — and that they heal in relationship, too.</p>
+    <p>I'm a therapist practicing in San Francisco, and my work centers on complex developmental trauma and attachment. Many of the people I see grew up having to be older than they were: reading the room before entering it, earning care instead of receiving it, becoming very good at being fine. That kind of childhood leaves patterns that don't respond to advice or willpower — they live in the body and in the ways we attach.</p>
+    <p>So that's where we work. Alongside talk therapy, I bring in <strong>inner child work</strong> — meeting the younger parts of you that are still waiting for someone to show up — as well as <strong>psychodrama</strong>, which lets us step into old scenes and give them new endings, and <strong>somatic practices</strong> that help your nervous system learn, in real time, what safety actually feels like.</p>
+    <p>The room reflects how I think about this work: unhurried, warm, a little bit sheltered from the weather. Healing here isn't about forcing change — it's about making room for it, the way fog lifts off the bay in its own time.</p>
+    <p>You may have noticed Boston asleep on the rug. He's real, he attends most sessions, and he is very good at his job.</p>
+    <p class="fineprint">CA License # &amp; credentials go here <em>(placeholder — to be confirmed)</em></p>
+  </template>
+
+  <template id="panel-services">
+    <h2 id="overlay-title">Services &amp; Fees</h2>
+    <p class="lede">Every plant on that shelf needs something different to grow. So does every person.</p>
+    <ul class="cards">
+      <li><h3>Trauma &amp; Attachment Therapy</h3><p>Weekly 50-minute sessions for adults healing from complex developmental trauma — the kind that came from how you were raised, not a single event.</p></li>
+      <li><h3>Inner Child Work</h3><p>Gently meeting the younger parts of you that adapted to survive, and giving them what they didn't get the first time: attention, protection, repair.</p></li>
+      <li><h3>Psychodrama</h3><p>Experiential work that puts old scenes in motion — speaking to an empty chair, stepping into a role, rehearsing the conversation you never got to have.</p></li>
+      <li><h3>Somatic Practices</h3><p>Body-based tools — breath, grounding, movement, tracking sensation — that teach your nervous system to settle, not just your thoughts.</p></li>
+    </ul>
+    <p class="muted">Telehealth sessions are available for clients anywhere in California.</p>
+    <h3 class="fees-heading">Fees</h3>
+    <p class="lede">Kept on plain paper, on purpose. No surprises.</p>
+    <table class="fee-table">
+      <tr><td>Individual session (50 min)</td><td>$220</td></tr>
+      <tr><td>Couples session (75 min)</td><td>$280</td></tr>
+      <tr><td>Initial consultation (20 min, phone)</td><td>Free</td></tr>
+    </table>
+    <p>I reserve a portion of my practice for <strong>sliding-scale clients</strong> — please ask, and never let the fee be the reason you don't reach out.</p>
+    <p>I am an out-of-network provider. I can provide a monthly superbill for insurance reimbursement, and I'm happy to walk you through how that works.</p>
+  </template>
+
+  <template id="panel-blog">
+    <h2 id="overlay-title">Writing</h2>
+    <p class="lede">Notes from the bookshelf — short essays on therapy, rest, and being a person.</p>
+    <div id="blog-list"><p class="muted">Loading articles…</p></div>
+    <article id="blog-article" hidden>
+      <button id="blog-back">← All articles</button>
+      <div id="blog-article-body"></div>
+    </article>
+  </template>
+
+  <template id="panel-contact">
+    <h2 id="overlay-title">Contact</h2>
+    <p class="lede">The hardest part is often the first call. I try to make it easy.</p>
+    <div class="contact-grid">
+      <div><h3>Reach me</h3>
+        <p>☎ (415) 555-0123<br/>✉ <a href="mailto:hello@example.com">hello@example.com</a></p>
+        <p class="muted">I return calls and emails within one business day.</p>
+      </div>
+      <div><h3>The office</h3>
+        <p>123 Presidio Avenue, Suite 4<br/>San Francisco, CA 94115 <em class="muted">(placeholder)</em></p>
+        <p class="muted">Near the Presidio — yes, you really can see the bridge.</p>
+      </div>
+      <div><h3>Hours</h3>
+        <p>Tue – Fri, 9am – 6pm<br/>Telehealth available statewide</p>
+      </div>
+    </div>
+    <p class="fineprint">If you are in crisis, please call or text 988 (Suicide &amp; Crisis Lifeline) — support is available 24/7.</p>
+  </template>
+
+  <template id="panel-cat">
+    <h2 id="overlay-title">Boston</h2>
+    <p class="lede">Resident therapy cat. Unlicensed, but very experienced.</p>
+    <p>Boston is a black-and-white shorthair who has sat in on more sessions than most interns. Specialties include: sitting on the exact paper you need, purring at clinically significant moments, and modeling excellent boundaries around nap time. He is also living proof that you can wear a tuxedo every day and still be extremely relaxed.</p>
+    <p class="muted">He says hi. That's all this one does. 🐾</p>
+  </template>
+
+  <footer id="site-footer">
+    <span>© <span id="year"></span> Art Xu · San Francisco, CA</span>
+  </footer>
+
+  <div id="crisis-bar">In crisis or thinking of harming yourself? Call or text <b>988</b> — Suicide &amp; Crisis Lifeline, 24/7.</div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,601 @@
+/* ============================================================
+   A Quiet Room by the Bay — Northern California palette
+   redwood · sage · fog cream · ocean · golden-gate red
+   ============================================================ */
+:root {
+  --cream: #f4eee0;
+  --cream-deep: #e9e0cb;
+  --ink: #443a2f;
+  --ink-soft: #6f6350;
+  --redwood: #b0834b;
+  --redwood-deep: #8f6a3b;
+  --sage: #7a9376;
+  --sage-deep: #5d7f59;
+  --ocean: #5b7d8f;
+  --gate: #c0472b;
+  --gold: #d8b25f;
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Nunito", -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------- header ---------------- */
+#site-header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 1.3rem 2rem 0.7rem;
+}
+.wordmark-name {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: 0.01em;
+  display: block;
+}
+.wordmark-sub {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+/* hint pill floating inside the top of the room */
+#room-hint {
+  position: absolute;
+  top: 0.9rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  margin: 0;
+  white-space: nowrap;
+  background: rgba(251, 247, 236, 0.92);
+  border: 1.5px solid var(--cream-deep);
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  box-shadow: 0 8px 20px -12px rgba(68, 58, 47, 0.4);
+  transition: opacity 0.6s;
+  text-align: center;
+}
+#room-hint b { color: var(--gate); }
+#room-hint.hidden { opacity: 0; }
+
+/* bottom icon nav */
+#icon-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 1.1rem auto 0.4rem;
+  padding: 0.35rem 0.6rem;
+  background: #fbf7ec;
+  border: 1.5px solid var(--cream-deep);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px -14px rgba(68, 58, 47, 0.4);
+}
+#icon-nav button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: none;
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+#icon-nav button:hover,
+#icon-nav button:focus-visible {
+  background: var(--cream-deep);
+  color: var(--ink);
+  transform: translateY(-2px);
+  outline: none;
+}
+.nav-icon { font-size: 1.05rem; line-height: 1; }
+
+/* ---------------- scene ---------------- */
+#scene-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem 1rem;
+}
+#scene-hint {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin: 0.2rem 0 0.8rem;
+  text-align: center;
+  font-style: italic;
+  font-family: var(--serif);
+}
+#room-frame {
+  position: relative;
+  width: min(560px, 94vw);
+  border-radius: 18px;
+  overflow: hidden;
+  filter: drop-shadow(0 26px 44px rgba(68, 58, 47, 0.22));
+}
+#room { display: block; width: 100%; height: auto; }
+
+/* ---------------- time-of-day skies ---------------- */
+/* defaults = day */
+.sky-top    { stop-color: #a7cbe0; }
+.sky-bottom { stop-color: #d9ebe9; }
+.ocean-top    { stop-color: #5b8fa3; }
+.ocean-bottom { stop-color: #3f6d80; }
+#sunmoon { fill: #f7dd8a; }
+.night-only { opacity: 0; transition: opacity 1s; }
+
+body[data-time="dawn"] .sky-top    { stop-color: #d6a89b; }
+body[data-time="dawn"] .sky-bottom { stop-color: #f2d9b8; }
+body[data-time="dawn"] .ocean-top    { stop-color: #7e93a0; }
+body[data-time="dawn"] .ocean-bottom { stop-color: #5a7684; }
+body[data-time="dawn"] #sunmoon { fill: #f5c26b; }
+
+body[data-time="dusk"] .sky-top    { stop-color: #b98bb0; }
+body[data-time="dusk"] .sky-bottom { stop-color: #eeb98a; }
+body[data-time="dusk"] .ocean-top    { stop-color: #6a7d94; }
+body[data-time="dusk"] .ocean-bottom { stop-color: #4a5f74; }
+body[data-time="dusk"] #sunmoon { fill: #f2a35f; }
+
+body[data-time="night"] .sky-top    { stop-color: #2c3a55; }
+body[data-time="night"] .sky-bottom { stop-color: #4a5a74; }
+body[data-time="night"] .ocean-top    { stop-color: #33465a; }
+body[data-time="night"] .ocean-bottom { stop-color: #24333f; }
+body[data-time="night"] #sunmoon { fill: #eef0dd; }
+body[data-time="night"] .night-only { opacity: 1; }
+body[data-time="night"] .cloud ellipse { opacity: 0.25; }
+
+/* stop-color transitions */
+#room stop { transition: stop-color 2s; }
+
+/* ---------------- idle animations ---------------- */
+.cloud-slow { animation: drift 40s linear infinite; }
+.cloud-fast { animation: drift 26s linear infinite; animation-delay: -10s; }
+@keyframes drift {
+  from { transform: translateX(-110px); }
+  to   { transform: translateX(200px); }
+}
+
+.sway      { animation: sway 5.5s ease-in-out infinite alternate; }
+.sway-slow { animation: sway 8s   ease-in-out infinite alternate; }
+@keyframes sway {
+  from { transform: rotate(-2.2deg); }
+  to   { transform: rotate(2.4deg); }
+}
+
+/* steam puffs up every few seconds, then rests */
+.steam { animation: steam 7s ease-in-out infinite; }
+@keyframes steam {
+  0%, 55%, 100% { opacity: 0; transform: translateY(4px); }
+  65% { opacity: 0.8; transform: translateY(0); }
+  82% { opacity: 0.45; transform: translateY(-5px); }
+  94% { opacity: 0; transform: translateY(-9px); }
+}
+
+/* the tail swishes back and forth every few seconds */
+.tail { animation: tailswish 6s ease-in-out infinite; }
+@keyframes tailswish {
+  0%, 68%, 100% { transform: rotate(0deg); }
+  74% { transform: rotate(-14deg); }
+  80% { transform: rotate(5deg); }
+  86% { transform: rotate(-10deg); }
+  93% { transform: rotate(0deg); }
+}
+
+.zzz { animation: zzz 3.4s ease-in-out infinite; }
+@keyframes zzz {
+  0%   { opacity: 0; transform: translateY(4px); }
+  40%  { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-7px); }
+}
+
+/* ---------------- window easter egg ---------------- */
+.curtain {
+  transition: transform 1.1s cubic-bezier(0.6, 0.05, 0.3, 1);
+  transform-box: fill-box;
+}
+#curtain-l { transform-origin: left center; }
+#curtain-r { transform-origin: right center; }
+body.curtains-open #curtain-l,
+body.curtains-open #curtain-r { transform: scaleX(0.18); }
+
+.sash {
+  transition: transform 0.9s ease, opacity 0.9s ease;
+  transform-box: fill-box;
+}
+#sash-l { transform-origin: left center; }
+#sash-r { transform-origin: right center; }
+body.window-open #sash-l { transform: scaleX(0.14) skewY(-10deg); opacity: 0.7; }
+body.window-open #sash-r { transform: scaleX(0.14) skewY(10deg); opacity: 0.7; }
+
+/* daylight floods in when the curtains open */
+#room { transition: filter 1.4s ease; }
+body.curtains-open[data-time="day"] #room,
+body.curtains-open[data-time="dawn"] #room {
+  filter: brightness(1.07) saturate(1.05);
+}
+
+/* the ocean waves */
+.wave { animation: wavemove 5.5s ease-in-out infinite alternate; }
+.wave-2 { animation-duration: 7s; animation-delay: -2s; }
+.wave-3 { animation-duration: 6.2s; animation-delay: -4s; }
+@keyframes wavemove {
+  from { transform: translateX(-12px); }
+  to   { transform: translateX(10px); }
+}
+
+/* the bird flies in through the open window and lands on the couch */
+#bird { opacity: 0; pointer-events: none; }
+body.window-open #bird {
+  opacity: 1;
+  animation: birdfly 2.4s cubic-bezier(0.35, 0.1, 0.35, 1) forwards;
+}
+@keyframes birdfly {
+  0%   { transform: translate(-95px, -215px); }
+  35%  { transform: translate(-115px, -130px); }
+  70%  { transform: translate(-15px, -55px); }
+  88%  { transform: translate(8px, -8px); }
+  100% { transform: translate(0, 0); }
+}
+body.window-open .wing {
+  transform-box: fill-box;
+  transform-origin: right center;
+  animation: flap 0.24s ease-in-out 9 alternate;
+}
+@keyframes flap {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-46deg); }
+}
+
+/* the cat wakes up when the bird arrives */
+.eyes-open { display: none; }
+body.window-open #hs-cat .eyes-open { display: block; }
+body.window-open #hs-cat .eyes-closed,
+body.window-open #hs-cat .zzz { display: none; }
+body.window-open #hs-cat .tail { animation: tailswish 1.8s ease-in-out infinite; }
+
+/* the couch clears its throat every few seconds */
+.couch-nudge {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: couchnudge 6s ease-in-out infinite;
+}
+@keyframes couchnudge {
+  0%, 86%, 100% { transform: scale(1) rotate(0deg); }
+  90% { transform: scale(1.022) rotate(-0.4deg); }
+  95% { transform: scale(1.012) rotate(0.3deg); }
+}
+
+/* ---------------- hotspots ---------------- */
+.hotspot {
+  cursor: pointer;
+  outline: none;
+  transition: filter 0.3s ease, transform 0.35s ease;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+.hotspot:hover,
+.hotspot:focus-visible,
+.hotspot.nudge {
+  filter: url(#softglow);
+  transform: scale(1.025);
+}
+.hotspot-soft:hover,
+.hotspot-soft:focus-visible {
+  transform: scale(1.04);
+}
+
+/* floating label */
+#hotspot-label {
+  position: absolute;
+  pointer-events: none;
+  padding: 0.35rem 0.85rem;
+  background: rgba(68, 58, 47, 0.92);
+  color: var(--cream);
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, 6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 5;
+}
+#hotspot-label.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------------- overlay ---------------- */
+#overlay { position: fixed; inset: 0; z-index: 50; }
+#overlay[hidden] { display: none; }
+#overlay-scrim {
+  position: absolute; inset: 0;
+  background: rgba(58, 48, 38, 0.45);
+  backdrop-filter: blur(3px);
+  animation: fadein 0.3s ease;
+}
+#overlay-card {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(680px, 92vw);
+  max-height: 84vh;
+  overflow-y: auto;
+  background: var(--cream);
+  border-radius: 20px;
+  border: 3px solid var(--redwood);
+  box-shadow: 0 30px 80px -20px rgba(40, 30, 20, 0.55);
+  padding: 2.2rem 2.4rem 2rem;
+  animation: cardin 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.05);
+}
+@keyframes fadein { from { opacity: 0; } }
+@keyframes cardin {
+  from { opacity: 0; transform: translate(-50%, -46%) scale(0.96); }
+}
+#overlay-close {
+  position: absolute;
+  top: 0.9rem; right: 1.1rem;
+  font-size: 1.7rem;
+  line-height: 1;
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 50%;
+}
+#overlay-close:hover, #overlay-close:focus-visible { color: var(--gate); outline: none; }
+
+#overlay-card h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.9rem;
+  margin: 0 0 0.4rem;
+  color: var(--redwood-deep);
+}
+#overlay-card h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0 0 0.3rem;
+  color: var(--sage-deep);
+}
+#overlay-card p { line-height: 1.65; }
+.lede {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  margin-top: 0;
+}
+.muted { color: var(--ink-soft); font-size: 0.9rem; }
+.fineprint {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--cream-deep);
+  padding-top: 0.8rem;
+  margin-top: 1.4rem;
+}
+
+/* services cards */
+.cards {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+.cards li {
+  background: #fbf7ec;
+  border: 1.5px solid var(--cream-deep);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+}
+.cards li p { margin: 0; font-size: 0.92rem; line-height: 1.55; }
+
+/* fees */
+.fees-heading {
+  border-top: 1.5px solid var(--cream-deep);
+  padding-top: 1.2rem;
+  margin-top: 1.5rem;
+  font-size: 1.25rem !important;
+}
+.fee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.6rem 0 1rem;
+  font-size: 1rem;
+}
+.fee-table td {
+  padding: 0.65rem 0.4rem;
+  border-bottom: 1.5px dashed var(--cream-deep);
+}
+.fee-table td:last-child {
+  text-align: right;
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--redwood-deep);
+}
+
+/* welcome panel actions */
+.welcome-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  margin-top: 1.4rem;
+}
+.btn-primary {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cream);
+  background: var(--gate);
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px -8px rgba(192, 71, 43, 0.7);
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.btn-primary:hover, .btn-primary:focus-visible {
+  background: #a83c22;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -8px rgba(192, 71, 43, 0.8);
+  outline: none;
+}
+.btn-link {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ocean);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0;
+}
+.btn-link:hover, .btn-link:focus-visible { text-decoration: underline; outline: none; }
+
+/* contact */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1.2rem;
+}
+.contact-grid a { color: var(--ocean); }
+
+/* blog */
+#blog-list .post-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: #fbf7ec;
+  border: 1.5px solid var(--cream-deep);
+  border-radius: 14px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 0.7rem;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: border-color 0.25s, transform 0.25s;
+}
+#blog-list .post-link:hover, #blog-list .post-link:focus-visible {
+  border-color: var(--sage);
+  transform: translateX(4px);
+  outline: none;
+}
+#blog-list .post-title {
+  font-family: var(--serif);
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--redwood-deep);
+  display: block;
+}
+#blog-list .post-meta { font-size: 0.78rem; color: var(--ink-soft); display: block; margin: 0.15rem 0 0.3rem; }
+#blog-list .post-summary { font-size: 0.9rem; margin: 0; color: var(--ink); }
+#blog-back {
+  background: none;
+  border: none;
+  color: var(--ocean);
+  font-family: var(--sans);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 0 0.8rem;
+  font-size: 0.9rem;
+}
+#blog-article-body h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--redwood-deep);
+  margin: 0 0 0.2rem;
+}
+#blog-article-body .article-date { font-size: 0.8rem; color: var(--ink-soft); margin-bottom: 1rem; }
+#blog-article-body h2, #blog-article-body h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--sage-deep);
+  margin: 1.4rem 0 0.4rem;
+}
+#blog-article-body p { line-height: 1.7; }
+#blog-article-body blockquote {
+  margin: 1rem 0;
+  padding: 0.2rem 1.2rem;
+  border-left: 3px solid var(--sage);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ---------------- footer & crisis bar ---------------- */
+#site-footer {
+  display: flex;
+  justify-content: center;
+  padding: 0.9rem 2rem 3rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+#crisis-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 40;
+  background: #e9c983;
+  color: #4a3a12;
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 0.45rem 1rem;
+}
+#crisis-bar b { font-weight: 700; }
+
+/* ---------------- reduced motion ---------------- */
+@media (prefers-reduced-motion: reduce) {
+  .cloud-slow, .cloud-fast, .sway, .sway-slow, .wave,
+  .steam, .tail, .zzz, .couch-nudge { animation: none; }
+  body.window-open #bird { animation: none; opacity: 1; }
+  body.window-open .wing { animation: none; }
+  .curtain, .sash { transition: none; }
+  .hotspot, .hotspot-soft { transition: none; }
+  #overlay-scrim, #overlay-card { animation: none; }
+}
+
+/* ---------------- small screens ---------------- */
+@media (max-width: 700px) {
+  #site-header { padding: 0.9rem 1rem 0.4rem; }
+  #scene-hint { font-size: 0.8rem; }
+  #overlay-card { padding: 1.6rem 1.3rem 1.4rem; }
+  .cards { grid-template-columns: 1fr; }
+  /* on touch there's no hover — gently pulse hotspots instead */
+  .hotspot { animation: invite 5s ease-in-out infinite; }
+  #hs-about    { animation-delay: 0.6s; }
+  #hs-blog     { animation-delay: 1.2s; }
+  #hs-services { animation-delay: 1.8s; }
+  #hs-contact  { animation-delay: 2.4s; }
+}
+@keyframes invite {
+  0%, 88%, 100% { transform: scale(1); }
+  93% { transform: scale(1.03); }
+}
+@media (max-width: 700px) and (prefers-reduced-motion: reduce) {
+  .hotspot { animation: none; }
+}
