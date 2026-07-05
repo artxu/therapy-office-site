@@ -268,6 +268,22 @@ body.window-open .wing {
   to   { transform: rotate(-46deg); }
 }
 
+/* wastebasket fills as papers are tidied */
+.basket-ball { opacity: 0; transform: translateY(-14px); transform-box: fill-box; }
+.basket-ball.in-basket {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+
+/* Boston's moods */
+#hs-cat.cat-awake .eyes-closed { display: none; }
+#hs-cat.cat-awake .eyes-open { display: block; }
+#hs-cat.cat-awake .zzz { display: none; }
+#hs-cat.cat-swish .tail { animation: tailswish 1.7s ease-in-out 2; }
+#cat-pos { transition: transform 1.3s cubic-bezier(0.5, 0, 0.3, 1); }
+#cat-pos.on-couch { transform: translate(135px, -207px); }
+
 /* the cat wakes up when the bird arrives */
 .eyes-open { display: none; }
 body.window-open #hs-cat .eyes-open { display: block; }
@@ -439,6 +455,23 @@ body.window-open #hs-cat .tail { animation: tailswish 1.8s ease-in-out infinite;
   color: var(--redwood-deep);
 }
 
+/* crumpled-note quotes */
+.paper-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 1.2rem 0 0.5rem;
+  padding: 0;
+  border: none;
+}
+.quote-by {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
 /* welcome panel actions */
 .welcome-actions {
   display: flex;
@@ -575,6 +608,8 @@ body.window-open #hs-cat .tail { animation: tailswish 1.8s ease-in-out infinite;
   body.window-open #bird { animation: none; opacity: 1; }
   body.window-open .wing { animation: none; }
   .curtain, .sash { transition: none; }
+  #cat-pos, .basket-ball.in-basket { transition: none; }
+  #hs-cat.cat-swish .tail { animation: none; }
   .hotspot, .hotspot-soft { transition: none; }
   #overlay-scrim, #overlay-card { animation: none; }
 }

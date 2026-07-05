@@ -46,6 +46,9 @@
     "hs-blog": "Writing · the bookshelf",
     "hs-contact": "Contact · the calendar",
     "hs-cat": "Boston (do not disturb)",
+    "hs-paper-1": "A crumpled note",
+    "hs-paper-2": "A crumpled note",
+    "hs-paper-3": "A crumpled note",
   };
   const PANEL_FOR = {
     "hs-welcome": "welcome",
@@ -78,6 +81,8 @@
 
   function activate(hs) {
     if (hs.id === "hs-window") cycleWindow();
+    else if (hs.id === "hs-cat") catClick(hs);
+    else if (hs.id.startsWith("hs-paper-")) openPaper(hs.id.slice(-1), hs);
     else openPanel(PANEL_FOR[hs.id]);
   }
 
@@ -94,6 +99,66 @@
       }
     });
   });
+
+  /* ---------------- loose papers & wastebasket ----------------
+     each paper opens a quote; "Tidy up" tosses it in the basket,
+     which fills by thirds until all three papers are cleared */
+  const PAPER_QUOTES = {
+    1: { quote: "When I let go of what I am, I become what I might be.", by: "Lao Tzu" },
+    2: { quote: "The wound is the place where the light enters you.", by: "Rumi" },
+    3: { quote: "You can't stop the waves, but you can learn to surf.", by: "Jon Kabat-Zinn" },
+  };
+  let tidied = 0;
+
+  function openPaper(n, hs) {
+    const q = PAPER_QUOTES[n];
+    if (!q) return;
+    lastFocus = document.activeElement;
+    content.innerHTML =
+      '<h2 id="overlay-title">A crumpled note</h2>' +
+      '<blockquote class="paper-quote">“' + q.quote + '”</blockquote>' +
+      '<p class="quote-by">— ' + q.by + "</p>" +
+      '<div class="welcome-actions"><button class="btn-primary" id="tidy-btn">Tidy up</button></div>';
+    content.querySelector("#tidy-btn").addEventListener("click", () => {
+      hs.parentElement.style.display = "none";
+      tidied += 1;
+      const ball = document.getElementById("basket-ball-" + tidied);
+      if (ball) ball.classList.add("in-basket");
+      closePanel();
+    });
+    const hint = document.getElementById("room-hint");
+    if (hint) hint.classList.add("hidden");
+    overlay.hidden = false;
+    document.body.style.overflow = "hidden";
+    card.focus();
+    hideLabel();
+  }
+
+  /* ---------------- Boston's moods ----------------
+     click 1: eyes open · click 2: tail swish · click 3: moves to
+     the couch · after that, clicks open his introduction */
+  let catState = 0;
+  function catClick(hs) {
+    if (catState === 0) {
+      catState = 1;
+      hs.classList.add("cat-awake");
+      LABELS["hs-cat"] = "Boston is awake";
+    } else if (catState === 1) {
+      catState = 2;
+      hs.classList.add("cat-swish");
+      setTimeout(() => hs.classList.remove("cat-swish"), 3500);
+      LABELS["hs-cat"] = "Boston approves";
+    } else if (catState === 2) {
+      catState = 3;
+      document.getElementById("cat-pos").classList.add("on-couch");
+      LABELS["hs-cat"] = "Boston · couch privileges";
+    } else {
+      openPanel("cat");
+      return;
+    }
+    hs.setAttribute("aria-label", LABELS["hs-cat"]);
+    showLabel(hs);
+  }
 
   /* ---------------- window easter egg ----------------
      click 1: curtains open (daylight brightens the room by day)
