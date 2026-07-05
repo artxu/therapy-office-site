@@ -172,18 +172,37 @@
      click 2: sashes open, a bird flies in, the cat wakes up
      click 3: everything closes again */
   let windowState = 0;
+  let closingWindow = false;
+  const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   function cycleWindow() {
-    windowState = (windowState + 1) % 3;
-    document.body.classList.toggle("curtains-open", windowState >= 1);
-    document.body.classList.toggle("window-open", windowState === 2);
-    if (windowState === 2) birdArrives();
-    if (windowState === 0) windowClosedReset();
+    if (closingWindow) return;
+    const next = (windowState + 1) % 3;
+    if (next === 0 && birdState < 2) {
+      // the bird gets a head start: it flies out, then the window closes
+      closingWindow = true;
+      clearTimeout(landTimer);
+      document.body.classList.remove("bird-here");
+      const birdPos = document.getElementById("bird-pos");
+      birdPos.classList.remove("bird-shelf");
+      birdPos.classList.add("bird-out");
+      setTimeout(() => {
+        closingWindow = false;
+        applyWindowState(0);
+      }, reducedMotion() ? 0 : 1300);
+      return;
+    }
+    applyWindowState(next);
+  }
+
+  function applyWindowState(s) {
+    windowState = s;
+    document.body.classList.toggle("curtains-open", s >= 1);
+    document.body.classList.toggle("window-open", s === 2);
+    if (s === 2) birdArrives();
+    if (s === 0) windowClosedReset();
     LABELS["hs-window"] =
-      windowState === 0
-        ? "Open the curtains"
-        : windowState === 1
-          ? "Open the window"
-          : "Close it all up";
+      s === 0 ? "Open the curtains" : s === 1 ? "Open the window" : "Close it all up";
     const hs = document.getElementById("hs-window");
     hs.setAttribute("aria-label", "The window — click to " + LABELS["hs-window"].toLowerCase());
     showLabel(hs);
@@ -196,16 +215,25 @@
      it flies out the window, Boston claims the bookshelf. closing the
      window after a chase sends Boston back to the rug, asleep. */
   let birdState = 0; // 0 perched on couch · 1 on bookshelf · 2 flown out
+  let birdLanded = false;
+  let landTimer = null;
 
   function birdArrives() {
     birdState = 0;
-    if (catState >= 1) {
-      document.getElementById("cat-flip").classList.add("face-bird");
-    }
+    birdLanded = false;
+    clearTimeout(landTimer);
+    // Boston reacts only once the bird has actually landed
+    landTimer = setTimeout(() => {
+      birdLanded = true;
+      document.body.classList.add("bird-here");
+      if (catState >= 1) {
+        document.getElementById("cat-flip").classList.add("face-bird");
+      }
+    }, reducedMotion() ? 0 : 2450);
   }
 
   function birdClick() {
-    if (!document.body.classList.contains("window-open")) return;
+    if (!document.body.classList.contains("window-open") || closingWindow || !birdLanded) return;
     const birdPos = document.getElementById("bird-pos");
     const catPos = document.getElementById("cat-pos");
     const flip = document.getElementById("cat-flip");
@@ -215,10 +243,12 @@
       catPos.classList.remove("on-couch");
       catPos.classList.add("chase-sofa");
       flip.classList.add("face-bird");
+      document.getElementById("hs-cat").classList.add("cat-awake");
       LABELS["bird"] = "Almost caught it";
       showLabel(document.getElementById("bird"));
     } else if (birdState === 1) {
       birdState = 2;
+      document.body.classList.remove("bird-here");
       birdPos.classList.remove("bird-shelf");
       birdPos.classList.add("bird-out");
       catPos.classList.remove("chase-sofa");
@@ -232,6 +262,9 @@
     const birdPos = document.getElementById("bird-pos");
     const catPos = document.getElementById("cat-pos");
     const cat = document.getElementById("hs-cat");
+    clearTimeout(landTimer);
+    birdLanded = false;
+    document.body.classList.remove("bird-here");
     document.getElementById("cat-flip").classList.remove("face-bird");
     if (birdState >= 1) {
       // the chase happened — Boston returns to the rug and dozes off

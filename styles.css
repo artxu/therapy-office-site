@@ -193,8 +193,7 @@ body[data-time="night"] .cloud ellipse { opacity: 0.25; }
   94% { opacity: 0; transform: translateY(-9px); }
 }
 
-/* the tail swishes back and forth every few seconds */
-.tail { animation: tailswish 6s ease-in-out infinite; }
+/* tail swish: one-shot on Boston's second click, continuous while the bird is in the room */
 @keyframes tailswish {
   0%, 68%, 100% { transform: rotate(0deg); }
   74% { transform: rotate(-14deg); }
@@ -320,10 +319,10 @@ body.window-open .wing {
 
 /* the cat wakes up when the bird arrives */
 .eyes-open { display: none; }
-body.window-open #hs-cat .eyes-open { display: block; }
-body.window-open #hs-cat .eyes-closed,
-body.window-open #hs-cat .zzz { display: none; }
-body.window-open #hs-cat .tail { animation: tailswish 1.8s ease-in-out infinite; }
+body.bird-here #hs-cat .eyes-open { display: block; }
+body.bird-here #hs-cat .eyes-closed,
+body.bird-here #hs-cat .zzz { display: none; }
+body.bird-here #hs-cat .tail { animation: tailswish 1.8s ease-in-out infinite; }
 
 /* the couch clears its throat every few seconds */
 .couch-nudge {
@@ -646,6 +645,7 @@ body.window-open #hs-cat .tail { animation: tailswish 1.8s ease-in-out infinite;
   .curtain, .sash { transition: none; }
   #cat-pos, #cat-flip, #bird-pos, .basket-ball.in-basket { transition: none; }
   #hs-cat.cat-swish .tail { animation: none; }
+  body.bird-here #hs-cat .tail { animation: none; }
   .hotspot, .hotspot-soft { transition: none; }
   #overlay-scrim, #overlay-card { animation: none; }
 }
