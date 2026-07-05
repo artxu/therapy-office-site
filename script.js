@@ -49,6 +49,7 @@
     "hs-paper-1": "A crumpled note",
     "hs-paper-2": "A crumpled note",
     "hs-paper-3": "A crumpled note",
+    "bird": "A little visitor",
   };
   const PANEL_FOR = {
     "hs-welcome": "welcome",
@@ -82,6 +83,7 @@
   function activate(hs) {
     if (hs.id === "hs-window") cycleWindow();
     else if (hs.id === "hs-cat") catClick(hs);
+    else if (hs.id === "bird") birdClick();
     else if (hs.id.startsWith("hs-paper-")) openPaper(hs.id.slice(-1), hs);
     else openPanel(PANEL_FOR[hs.id]);
   }
@@ -139,6 +141,11 @@
      the couch · after that, clicks open his introduction */
   let catState = 0;
   function catClick(hs) {
+    if (birdState >= 1) {
+      // Boston is mid-chase — he has no time for the state machine
+      openPanel("cat");
+      return;
+    }
     if (catState === 0) {
       catState = 1;
       hs.classList.add("cat-awake");
@@ -169,6 +176,8 @@
     windowState = (windowState + 1) % 3;
     document.body.classList.toggle("curtains-open", windowState >= 1);
     document.body.classList.toggle("window-open", windowState === 2);
+    if (windowState === 2) birdArrives();
+    if (windowState === 0) windowClosedReset();
     LABELS["hs-window"] =
       windowState === 0
         ? "Open the curtains"
@@ -178,6 +187,63 @@
     const hs = document.getElementById("hs-window");
     hs.setAttribute("aria-label", "The window — click to " + LABELS["hs-window"].toLowerCase());
     showLabel(hs);
+  }
+
+  /* ---------------- the bird chase ----------------
+     bird arrives: a sleeping Boston opens his eyes; an already-awake
+     Boston turns to face the bird. click the bird → it hops to the
+     bookshelf, Boston follows to the right of the sofa. click again →
+     it flies out the window, Boston claims the bookshelf. closing the
+     window after a chase sends Boston back to the rug, asleep. */
+  let birdState = 0; // 0 perched on couch · 1 on bookshelf · 2 flown out
+
+  function birdArrives() {
+    birdState = 0;
+    if (catState >= 1) {
+      document.getElementById("cat-flip").classList.add("face-bird");
+    }
+  }
+
+  function birdClick() {
+    if (!document.body.classList.contains("window-open")) return;
+    const birdPos = document.getElementById("bird-pos");
+    const catPos = document.getElementById("cat-pos");
+    const flip = document.getElementById("cat-flip");
+    if (birdState === 0) {
+      birdState = 1;
+      birdPos.classList.add("bird-shelf");
+      catPos.classList.remove("on-couch");
+      catPos.classList.add("chase-sofa");
+      flip.classList.add("face-bird");
+      LABELS["bird"] = "Almost caught it";
+      showLabel(document.getElementById("bird"));
+    } else if (birdState === 1) {
+      birdState = 2;
+      birdPos.classList.remove("bird-shelf");
+      birdPos.classList.add("bird-out");
+      catPos.classList.remove("chase-sofa");
+      catPos.classList.add("chase-shelf");
+      flip.classList.remove("face-bird");
+      hideLabel();
+    }
+  }
+
+  function windowClosedReset() {
+    const birdPos = document.getElementById("bird-pos");
+    const catPos = document.getElementById("cat-pos");
+    const cat = document.getElementById("hs-cat");
+    document.getElementById("cat-flip").classList.remove("face-bird");
+    if (birdState >= 1) {
+      // the chase happened — Boston returns to the rug and dozes off
+      catState = 0;
+      catPos.classList.remove("on-couch", "chase-sofa", "chase-shelf");
+      cat.classList.remove("cat-awake", "cat-swish");
+      LABELS["hs-cat"] = "Boston (do not disturb)";
+      cat.setAttribute("aria-label", "Boston the cat, asleep on the rug");
+    }
+    birdState = 0;
+    birdPos.classList.remove("bird-shelf", "bird-out");
+    LABELS["bird"] = "A little visitor";
   }
 
   /* ---------------- overlay ---------------- */

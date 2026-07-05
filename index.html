@@ -254,8 +254,9 @@
         </g>
         </g>
 
-        <!-- ======================= BIRD (flies in when the window opens) ======================= -->
-        <g id="bird" aria-hidden="true">
+        <!-- ======================= BIRD (flies in when the window opens; click to chase) ======================= -->
+        <g id="bird-pos">
+        <g id="bird" class="hotspot hotspot-soft" tabindex="0" role="button" aria-label="A little bird perched on the couch">
           <path d="M446 480 l-2 4 M452 480 l2 4" stroke="#8a6a3f" stroke-width="1.6" stroke-linecap="round"/>
           <ellipse cx="449" cy="471" rx="10" ry="7.5" fill="#5b7d8f"/>
           <path d="M439 470 l-8 6 8 2 z" fill="#4a6a7c"/>
@@ -264,6 +265,7 @@
           <ellipse cx="453" cy="470" rx="4.5" ry="3.5" fill="#f2e9d4"/>
           <circle cx="459" cy="462" r="1.2" fill="#1e2a30"/>
           <path d="M462 464 l6 1.5 -6 1.5 z" fill="#e8b76a"/>
+        </g>
         </g>
 
         <!-- ======================= DIPLOMA (About, left wall) ======================= -->
@@ -356,6 +358,7 @@
         <!-- ======================= CAT (easter egg) ======================= -->
         <g transform="translate(-95,127)">
         <g id="cat-pos">
+        <g id="cat-flip">
         <g id="hs-cat" class="hotspot hotspot-soft" tabindex="0" role="button" aria-label="Boston the cat, asleep on the rug">
           <ellipse cx="350" cy="668" rx="44" ry="20" fill="#2f2b29"/>
           <!-- white chest/belly patch -->
@@ -384,9 +387,10 @@
         </g>
         </g>
         </g>
+        </g>
 
-        <!-- ======================= WASTEBASKET ======================= -->
-        <g id="basket">
+        <!-- ======================= WASTEBASKET (left of the side table) ======================= -->
+        <g id="basket" transform="translate(-48,-18)">
           <path d="M62 700 L74 770 h44 L130 700 z" fill="#c9a26b"/>
           <path d="M62 700 L74 770 h44 L130 700 z" fill="none" stroke="#b0834b" stroke-width="2"/>
           <path d="M66 718 h60 M70 736 h52 M73 753 h46" stroke="#b0834b" stroke-width="2" opacity="0.7"/>

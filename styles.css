@@ -246,10 +246,34 @@ body.curtains-open[data-time="dawn"] #room {
 }
 
 /* the bird flies in through the open window and lands on the couch */
-#bird { opacity: 0; pointer-events: none; }
-body.window-open #bird {
+#bird-pos {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 1.2s ease, opacity 0.9s ease, visibility 0s 0.9s;
+}
+body.window-open #bird-pos {
   opacity: 1;
-  animation: birdfly 2.4s cubic-bezier(0.35, 0.1, 0.35, 1) forwards;
+  visibility: visible;
+  pointer-events: auto;
+  animation: birdfly 2.4s cubic-bezier(0.35, 0.1, 0.35, 1);
+}
+/* click 1: up to the bookshelf · click 2: out the window */
+body.window-open #bird-pos.bird-shelf {
+  animation: none;
+  transform: translate(171px, -62px);
+}
+body.window-open #bird-pos.bird-shelf .wing {
+  animation: flap 0.24s ease-in-out 6 alternate;
+}
+body.window-open #bird-pos.bird-out {
+  animation: none;
+  transform: translate(-89px, -171px);
+  opacity: 0;
+  pointer-events: none;
+}
+body.window-open #bird-pos.bird-out .wing {
+  animation: flap 0.24s ease-in-out 10 alternate;
 }
 @keyframes birdfly {
   0%   { transform: translate(-95px, -215px); }
@@ -283,6 +307,16 @@ body.window-open .wing {
 #hs-cat.cat-swish .tail { animation: tailswish 1.7s ease-in-out 2; }
 #cat-pos { transition: transform 1.3s cubic-bezier(0.5, 0, 0.3, 1); }
 #cat-pos.on-couch { transform: translate(135px, -207px); }
+/* chasing the bird: right side of the sofa, then the bookshelf top */
+#cat-pos.chase-sofa { transform: translate(180px, -207px); }
+#cat-pos.chase-shelf { transform: translate(365px, -395px); }
+/* turning to face the bird */
+#cat-flip {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.7s ease;
+}
+#cat-flip.face-bird { transform: scaleX(-1); }
 
 /* the cat wakes up when the bird arrives */
 .eyes-open { display: none; }
@@ -605,10 +639,12 @@ body.window-open #hs-cat .tail { animation: tailswish 1.8s ease-in-out infinite;
 @media (prefers-reduced-motion: reduce) {
   .cloud-slow, .cloud-fast, .sway, .sway-slow, .wave,
   .steam, .tail, .zzz, .couch-nudge { animation: none; }
-  body.window-open #bird { animation: none; opacity: 1; }
+  body.window-open #bird-pos { animation: none; opacity: 1; }
   body.window-open .wing { animation: none; }
+  body.window-open #bird-pos.bird-shelf .wing,
+  body.window-open #bird-pos.bird-out .wing { animation: none; }
   .curtain, .sash { transition: none; }
-  #cat-pos, .basket-ball.in-basket { transition: none; }
+  #cat-pos, #cat-flip, #bird-pos, .basket-ball.in-basket { transition: none; }
   #hs-cat.cat-swish .tail { animation: none; }
   .hotspot, .hotspot-soft { transition: none; }
   #overlay-scrim, #overlay-card { animation: none; }
