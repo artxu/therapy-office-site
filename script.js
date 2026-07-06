@@ -222,13 +222,12 @@
     birdState = 0;
     birdLanded = false;
     clearTimeout(landTimer);
-    // Boston reacts only once the bird has actually landed
+    // Boston reacts only once the bird has actually landed:
+    // eyes open (if asleep), turn toward the bird, tail swishing
     landTimer = setTimeout(() => {
       birdLanded = true;
       document.body.classList.add("bird-here");
-      if (catState >= 1) {
-        document.getElementById("cat-flip").classList.add("face-bird");
-      }
+      document.getElementById("cat-flip").classList.add("face-bird");
     }, reducedMotion() ? 0 : 2450);
   }
 
