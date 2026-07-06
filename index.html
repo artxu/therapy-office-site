@@ -452,7 +452,9 @@
         </g>
 
         <!-- ======================= PORTAL (hidden until the 8th click) ======================= -->
-        <rect id="room-dim" x="0" y="0" width="720" height="900" fill="#141026" opacity="0" pointer-events="none"/>
+        <!-- darkens the room but leaves a bright hole over the window + curtains -->
+        <path id="room-dim" d="M0 0 h720 v900 h-720 z M214 138 h292 v324 h-292 z"
+              fill="#141026" fill-rule="evenodd" opacity="0" pointer-events="none"/>
         <g id="portal" aria-hidden="true">
           <!-- pulsing green/purple glow over the rug -->
           <ellipse class="pglow pglow-green" cx="360" cy="790" rx="252" ry="66" fill="url(#portalGreen)"/>

@@ -353,7 +353,9 @@ body.portal-active .ring-b { animation: portalspin-rev 3s linear infinite; }
 @keyframes portalspin { to { transform: rotate(360deg); } }
 @keyframes portalspin-rev { to { transform: rotate(-360deg); } }
 
-/* days streak past the window */
+/* days streak past the window (the static sun/moon steps aside) */
+#sunmoon { transition: opacity 0.6s ease; }
+body.portal-active #sunmoon { opacity: 0; }
 #portal-sky { opacity: 0; }
 body.portal-active #portal-sky { opacity: 1; transition: opacity 0.8s ease; }
 #p-night, #p-sun, #p-moon { opacity: 0; }
