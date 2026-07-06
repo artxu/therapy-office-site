@@ -52,6 +52,16 @@
             <stop offset="0" class="ocean-top"/>
             <stop offset="1" class="ocean-bottom"/>
           </linearGradient>
+          <radialGradient id="portalGreen">
+            <stop offset="0" stop-color="#6ee7a0" stop-opacity="0.95"/>
+            <stop offset="0.55" stop-color="#34d399" stop-opacity="0.45"/>
+            <stop offset="1" stop-color="#34d399" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="portalPurple">
+            <stop offset="0" stop-color="#c4a7fa" stop-opacity="0.95"/>
+            <stop offset="0.55" stop-color="#a78bfa" stop-opacity="0.45"/>
+            <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
+          </radialGradient>
         </defs>
 
         <!-- ======================= ROOM SHELL ======================= -->
@@ -116,6 +126,12 @@
                 <line x1="384" y1="292" x2="384" y2="322"/><line x1="280" y1="300" x2="280" y2="322"/>
                 <line x1="434" y1="298" x2="434" y2="322"/>
               </g>
+            </g>
+            <!-- fast-forward days (portal only) -->
+            <g id="portal-sky" aria-hidden="true">
+              <rect id="p-night" x="256" y="176" width="208" height="248" fill="#16233f"/>
+              <circle id="p-sun" cx="286" cy="230" r="14" fill="#f7dd8a"/>
+              <circle id="p-moon" cx="286" cy="230" r="11" fill="#eef0dd"/>
             </g>
           </g>
           <!-- casement sashes (open on second click) -->
@@ -319,11 +335,16 @@
         <ellipse cx="360" cy="790" rx="204" ry="50" fill="#dcb197" />
         <ellipse cx="360" cy="790" rx="144" ry="36" fill="#c98f6f"/>
         <ellipse cx="360" cy="790" rx="77" ry="20" fill="#dcb197"/>
-        <!-- yin-yang at rug center -->
+        <!-- yin-yang at rug center (click it 8 times…) -->
         <g opacity="0.55" transform="translate(360 790) scale(1.3 0.55)">
+        <g id="yy-hint-wrap">
+        <g id="hs-yinyang" class="hotspot hotspot-soft" tabindex="0" role="button" aria-label="The yin-yang at the center of the rug">
+          <circle r="21" fill="transparent"/>
           <circle r="16" fill="#f2e9d4"/>
           <path d="M0 -16 a16 16 0 0 1 0 32 a8 8 0 0 1 0 -16 a8 8 0 0 0 0 -16" fill="#59503f"/>
           <circle cy="-8" r="2.6" fill="#59503f"/><circle cy="8" r="2.6" fill="#f2e9d4"/>
+        </g>
+        </g>
         </g>
 
         <!-- couch side table with tea -->
@@ -430,11 +451,52 @@
         </g>
         </g>
 
+        <!-- ======================= PORTAL (hidden until the 8th click) ======================= -->
+        <rect id="room-dim" x="0" y="0" width="720" height="900" fill="#141026" opacity="0" pointer-events="none"/>
+        <g id="portal" aria-hidden="true">
+          <!-- pulsing green/purple glow over the rug -->
+          <ellipse class="pglow pglow-green" cx="360" cy="790" rx="252" ry="66" fill="url(#portalGreen)"/>
+          <ellipse class="pglow pglow-purple" cx="360" cy="790" rx="252" ry="66" fill="url(#portalPurple)"/>
+          <!-- swirling vortex on the carpet -->
+          <g transform="translate(360 790) scale(1 0.42)">
+            <g id="portal-rays" stroke-width="4" stroke-linecap="round" opacity="0.9">
+              <line x1="48" y1="0" x2="225" y2="0" stroke="#6ee7a0"/>
+              <line x1="42" y1="24" x2="195" y2="113" stroke="#b9a0f7"/>
+              <line x1="24" y1="42" x2="113" y2="195" stroke="#6ee7a0"/>
+              <line x1="0" y1="48" x2="0" y2="225" stroke="#b9a0f7"/>
+              <line x1="-24" y1="42" x2="-113" y2="195" stroke="#6ee7a0"/>
+              <line x1="-42" y1="24" x2="-195" y2="113" stroke="#b9a0f7"/>
+              <line x1="-48" y1="0" x2="-225" y2="0" stroke="#6ee7a0"/>
+              <line x1="-42" y1="-24" x2="-195" y2="-113" stroke="#b9a0f7"/>
+              <line x1="-24" y1="-42" x2="-113" y2="-195" stroke="#6ee7a0"/>
+              <line x1="0" y1="-48" x2="0" y2="-225" stroke="#b9a0f7"/>
+              <line x1="24" y1="-42" x2="113" y2="-195" stroke="#6ee7a0"/>
+              <line x1="42" y1="-24" x2="195" y2="-113" stroke="#b9a0f7"/>
+              <circle class="ring-a" r="110" fill="none" stroke="#6ee7a0" stroke-width="3.5" stroke-dasharray="18 14"/>
+              <circle class="ring-b" r="170" fill="none" stroke="#a78bfa" stroke-width="3.5" stroke-dasharray="26 18"/>
+            </g>
+          </g>
+          <!-- bright spinning yin-yang above the darkness -->
+          <g transform="translate(360 790) scale(1.3 0.55)">
+            <g id="portal-yy">
+              <circle r="16" fill="#f2e9d4"/>
+              <path d="M0 -16 a16 16 0 0 1 0 32 a8 8 0 0 1 0 -16 a8 8 0 0 0 0 -16" fill="#59503f"/>
+              <circle cy="-8" r="2.6" fill="#59503f"/><circle cy="8" r="2.6" fill="#f2e9d4"/>
+            </g>
+          </g>
+          <!-- Boston riding it out under the couch -->
+          <g id="hide-eyes">
+            <circle cx="356" cy="672" r="3" fill="#8dfab0"/>
+            <circle cx="372" cy="672" r="3" fill="#8dfab0"/>
+          </g>
+        </g>
+
         <!-- grain overlay -->
         <rect x="0" y="0" width="720" height="900" filter="url(#grain)" fill="transparent" pointer-events="none"/>
       </svg>
 
       <div id="hotspot-label" role="status" aria-hidden="true"></div>
+      <div id="whiteout" aria-hidden="true"></div>
     </div>
 
     <nav id="icon-nav" aria-label="Site sections">

@@ -50,6 +50,7 @@
     "hs-paper-2": "A crumpled note",
     "hs-paper-3": "A crumpled note",
     "bird": "A little visitor",
+    "hs-yinyang": "The center of things",
   };
   const PANEL_FOR = {
     "hs-welcome": "welcome",
@@ -81,9 +82,11 @@
   }
 
   function activate(hs) {
+    if (portalRunning) return;
     if (hs.id === "hs-window") cycleWindow();
     else if (hs.id === "hs-cat") catClick(hs);
     else if (hs.id === "bird") birdClick();
+    else if (hs.id === "hs-yinyang") yinyangClick();
     else if (hs.id.startsWith("hs-paper-")) openPaper(hs.id.slice(-1), hs);
     else openPanel(PANEL_FOR[hs.id]);
   }
@@ -257,25 +260,86 @@
     }
   }
 
-  function windowClosedReset() {
-    const birdPos = document.getElementById("bird-pos");
-    const catPos = document.getElementById("cat-pos");
+  function resetCat() {
+    // Boston returns to the rug and dozes off
+    catState = 0;
+    document.getElementById("cat-pos").classList.remove("on-couch", "chase-sofa", "chase-shelf");
     const cat = document.getElementById("hs-cat");
+    cat.classList.remove("cat-awake", "cat-swish");
+    document.getElementById("cat-flip").classList.remove("face-bird");
+    LABELS["hs-cat"] = "Boston (do not disturb)";
+    cat.setAttribute("aria-label", "Boston the cat, asleep on the rug");
+  }
+
+  function windowClosedReset() {
     clearTimeout(landTimer);
     birdLanded = false;
     document.body.classList.remove("bird-here");
     document.getElementById("cat-flip").classList.remove("face-bird");
-    if (birdState >= 1) {
-      // the chase happened — Boston returns to the rug and dozes off
-      catState = 0;
-      catPos.classList.remove("on-couch", "chase-sofa", "chase-shelf");
-      cat.classList.remove("cat-awake", "cat-swish");
-      LABELS["hs-cat"] = "Boston (do not disturb)";
-      cat.setAttribute("aria-label", "Boston the cat, asleep on the rug");
-    }
+    if (birdState >= 1) resetCat(); // the chase happened
     birdState = 0;
-    birdPos.classList.remove("bird-shelf", "bird-out");
+    document.getElementById("bird-pos").classList.remove("bird-shelf", "bird-out");
     LABELS["bird"] = "A little visitor";
+  }
+
+  /* ---------------- the yin-yang portal ----------------
+     eight patient clicks on the rug's center: the vortex spins,
+     the room darkens, days streak past the window, Boston rides
+     it out under the couch — then white, and nothing happened. */
+  let yyClicks = 0;
+  let portalRunning = false;
+
+  function yinyangClick() {
+    yyClicks += 1;
+    if (yyClicks >= 8) {
+      yyClicks = 0;
+      runPortal();
+      return;
+    }
+    if (yyClicks >= 5) {
+      // clicks 5–7: something stirs, a little more each time
+      const wrap = document.getElementById("yy-hint-wrap");
+      wrap.style.setProperty("--hint-scale", (1.1 + (yyClicks - 4) * 0.15).toFixed(2));
+      wrap.classList.remove("yy-hint");
+      void wrap.getBoundingClientRect(); // restart the one-shot animation
+      wrap.classList.add("yy-hint");
+      setTimeout(() => wrap.classList.remove("yy-hint"), 600);
+    }
+  }
+
+  function runPortal() {
+    portalRunning = true;
+    hideLabel();
+    document.body.classList.add("portal-active");
+    const T = reducedMotion() ? 0.35 : 1;
+    setTimeout(() => document.body.classList.add("portal-white"), 6200 * T);
+    setTimeout(() => {
+      document.body.classList.remove("portal-active");
+      resetRoom();
+    }, 7200 * T);
+    setTimeout(() => {
+      document.body.classList.remove("portal-white");
+      portalRunning = false;
+    }, 7900 * T);
+  }
+
+  function resetRoom() {
+    // as if nothing had happened (tidied papers stay tidied)
+    clearTimeout(landTimer);
+    birdLanded = false;
+    closingWindow = false;
+    windowState = 0;
+    birdState = 0;
+    document.body.classList.remove("curtains-open", "window-open", "bird-here");
+    document.getElementById("bird-pos").classList.remove("bird-shelf", "bird-out");
+    LABELS["bird"] = "A little visitor";
+    LABELS["hs-window"] = "Open the curtains";
+    document.getElementById("hs-window").setAttribute("aria-label", "The window — click to open the curtains");
+    resetCat();
+    // snap the cat home instantly while the screen is white
+    const catPos = document.getElementById("cat-pos");
+    catPos.classList.add("snap");
+    setTimeout(() => catPos.classList.remove("snap"), 150);
   }
 
   /* ---------------- overlay ---------------- */

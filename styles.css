@@ -217,7 +217,9 @@ body[data-time="night"] .cloud ellipse { opacity: 0.25; }
 #curtain-l { transform-origin: left center; }
 #curtain-r { transform-origin: right center; }
 body.curtains-open #curtain-l,
-body.curtains-open #curtain-r { transform: scaleX(0.18); }
+body.curtains-open #curtain-r,
+body.portal-active #curtain-l,
+body.portal-active #curtain-r { transform: scaleX(0.18); }
 
 .sash {
   transition: transform 0.9s ease, opacity 0.9s ease;
@@ -225,8 +227,10 @@ body.curtains-open #curtain-r { transform: scaleX(0.18); }
 }
 #sash-l { transform-origin: left center; }
 #sash-r { transform-origin: right center; }
-body.window-open #sash-l { transform: scaleX(0.14) skewY(-10deg); opacity: 0.7; }
-body.window-open #sash-r { transform: scaleX(0.14) skewY(10deg); opacity: 0.7; }
+body.window-open #sash-l,
+body.portal-active #sash-l { transform: scaleX(0.14) skewY(-10deg); opacity: 0.7; }
+body.window-open #sash-r,
+body.portal-active #sash-r { transform: scaleX(0.14) skewY(10deg); opacity: 0.7; }
 
 /* daylight floods in when the curtains open */
 #room { transition: filter 1.4s ease; }
@@ -323,6 +327,102 @@ body.bird-here #hs-cat .eyes-open { display: block; }
 body.bird-here #hs-cat .eyes-closed,
 body.bird-here #hs-cat .zzz { display: none; }
 body.bird-here #hs-cat .tail { animation: tailswish 1.8s ease-in-out infinite; }
+
+/* ---------------- the yin-yang portal ---------------- */
+/* the room darkens; everything in #portal renders above the dark */
+#room-dim { transition: opacity 1.2s ease; }
+body.portal-active #room-dim { opacity: 0.55; }
+
+#portal { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
+body.portal-active #portal { opacity: 1; }
+
+.pglow { opacity: 0; }
+body.portal-active .pglow-green { animation: pglow-a 1.6s ease-in-out infinite; }
+body.portal-active .pglow-purple { animation: pglow-b 1.6s ease-in-out infinite; }
+@keyframes pglow-a { 0%, 100% { opacity: 0.95; } 50% { opacity: 0.25; } }
+@keyframes pglow-b { 0%, 100% { opacity: 0.25; } 50% { opacity: 0.95; } }
+
+#portal-rays, #portal-yy, .ring-a, .ring-b {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+body.portal-active #portal-rays { animation: portalspin 2.6s linear infinite; }
+body.portal-active #portal-yy { animation: portalspin 1.1s linear infinite; }
+body.portal-active .ring-a { animation: portalspin 4s linear infinite; }
+body.portal-active .ring-b { animation: portalspin-rev 3s linear infinite; }
+@keyframes portalspin { to { transform: rotate(360deg); } }
+@keyframes portalspin-rev { to { transform: rotate(-360deg); } }
+
+/* days streak past the window */
+#portal-sky { opacity: 0; }
+body.portal-active #portal-sky { opacity: 1; transition: opacity 0.8s ease; }
+#p-night, #p-sun, #p-moon { opacity: 0; }
+body.portal-active #p-night { animation: pnight 1.3s ease-in-out infinite; }
+body.portal-active #p-sun { animation: pcross 1.3s linear infinite; }
+body.portal-active #p-moon { animation: pcross 1.3s linear infinite; animation-delay: -0.65s; }
+@keyframes pnight {
+  0%, 45% { opacity: 0; }
+  70%, 95% { opacity: 0.55; }
+  100% { opacity: 0; }
+}
+@keyframes pcross {
+  0% { transform: translate(-60px, 12px); opacity: 0; }
+  12% { opacity: 1; }
+  50% { transform: translate(90px, -20px); }
+  88% { opacity: 1; }
+  100% { transform: translate(240px, 12px); opacity: 0; }
+}
+
+/* curtains flutter in the portal wind */
+body.portal-active #curtain-l { animation: curtainblow-l 0.7s ease-in-out infinite alternate; }
+body.portal-active #curtain-r { animation: curtainblow-r 0.7s ease-in-out infinite alternate; }
+@keyframes curtainblow-l {
+  from { transform: scaleX(0.18) skewY(-2deg); }
+  to   { transform: scaleX(0.27) skewY(3deg); }
+}
+@keyframes curtainblow-r {
+  from { transform: scaleX(0.18) skewY(2deg); }
+  to   { transform: scaleX(0.27) skewY(-3deg); }
+}
+
+/* Boston bolts under the couch (works from any position) */
+body.portal-active #cat-pos {
+  transform: translate(125px, -115px);
+  opacity: 0;
+  transition: transform 0.55s cubic-bezier(0.35, 1.3, 0.5, 1), opacity 0.25s ease 0.5s;
+}
+#cat-pos.snap { transition: none; }
+#hide-eyes { opacity: 0; transform-box: fill-box; transform-origin: center; }
+body.portal-active #hide-eyes {
+  opacity: 1;
+  transition: opacity 0.5s ease 1.1s;
+  animation: eyeblink 2.8s ease-in-out 1.4s infinite;
+}
+@keyframes eyeblink {
+  0%, 88%, 100% { transform: scaleY(1); }
+  93% { transform: scaleY(0.1); }
+}
+
+/* fade to white, and back */
+#whiteout {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: #fdfaf2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.9s ease;
+}
+body.portal-white #whiteout { opacity: 1; }
+
+/* clicks 5–7: something stirs */
+#yy-hint-wrap { transform-box: fill-box; transform-origin: center; }
+#yy-hint-wrap.yy-hint { animation: yyhint 0.55s ease-in-out; }
+@keyframes yyhint {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  35% { transform: scale(var(--hint-scale, 1.25)) rotate(14deg); }
+  70% { transform: scale(1.05) rotate(-8deg); }
+}
 
 /* the couch clears its throat every few seconds */
 .couch-nudge {
@@ -646,6 +746,17 @@ body.bird-here #hs-cat .tail { animation: tailswish 1.8s ease-in-out infinite; }
   #cat-pos, #cat-flip, #bird-pos, .basket-ball.in-basket { transition: none; }
   #hs-cat.cat-swish .tail { animation: none; }
   body.bird-here #hs-cat .tail { animation: none; }
+  /* portal: no motion, but the state changes still read */
+  body.portal-active #portal-rays, body.portal-active #portal-yy,
+  body.portal-active .ring-a, body.portal-active .ring-b,
+  body.portal-active .pglow-green, body.portal-active .pglow-purple,
+  body.portal-active #curtain-l, body.portal-active #curtain-r,
+  body.portal-active #p-sun, body.portal-active #p-moon,
+  body.portal-active #p-night, body.portal-active #hide-eyes,
+  #yy-hint-wrap.yy-hint { animation: none; }
+  body.portal-active .pglow-green { opacity: 0.7; }
+  body.portal-active #p-sun { opacity: 1; }
+  #room-dim, #portal, #whiteout, body.portal-active #cat-pos { transition: none; }
   .hotspot, .hotspot-soft { transition: none; }
   #overlay-scrim, #overlay-card { animation: none; }
 }
