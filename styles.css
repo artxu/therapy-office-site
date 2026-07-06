@@ -375,18 +375,6 @@ body.portal-active #p-moon { animation: pcross 1.3s linear infinite; animation-d
   100% { transform: translate(240px, 12px); opacity: 0; }
 }
 
-/* curtains flutter in the portal wind */
-body.portal-active #curtain-l { animation: curtainblow-l 0.7s ease-in-out infinite alternate; }
-body.portal-active #curtain-r { animation: curtainblow-r 0.7s ease-in-out infinite alternate; }
-@keyframes curtainblow-l {
-  from { transform: scaleX(0.18) skewY(-2deg); }
-  to   { transform: scaleX(0.27) skewY(3deg); }
-}
-@keyframes curtainblow-r {
-  from { transform: scaleX(0.18) skewY(2deg); }
-  to   { transform: scaleX(0.27) skewY(-3deg); }
-}
-
 /* Boston bolts under the couch (works from any position) */
 body.portal-active #cat-pos {
   transform: translate(125px, -115px);
@@ -752,7 +740,6 @@ body.portal-white #whiteout { opacity: 1; }
   body.portal-active #portal-rays, body.portal-active #portal-yy,
   body.portal-active .ring-a, body.portal-active .ring-b,
   body.portal-active .pglow-green, body.portal-active .pglow-purple,
-  body.portal-active #curtain-l, body.portal-active #curtain-r,
   body.portal-active #p-sun, body.portal-active #p-moon,
   body.portal-active #p-night, body.portal-active #hide-eyes,
   #yy-hint-wrap.yy-hint { animation: none; }
