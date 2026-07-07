@@ -127,11 +127,24 @@
                 <line x1="434" y1="298" x2="434" y2="322"/>
               </g>
             </g>
-            <!-- fast-forward days (portal only) -->
+            <!-- the storm outside (portal only) -->
             <g id="portal-sky" aria-hidden="true">
-              <rect id="p-night" x="256" y="176" width="208" height="248" fill="#16233f"/>
-              <circle id="p-sun" cx="286" cy="230" r="14" fill="#f7dd8a"/>
-              <circle id="p-moon" cx="286" cy="230" r="11" fill="#eef0dd"/>
+              <rect id="storm-sky" x="256" y="176" width="208" height="248" fill="#1f2a3e" opacity="0.55"/>
+              <g class="scloud scloud-back" fill="#3a4763">
+                <ellipse cx="300" cy="196" rx="44" ry="14"/>
+                <ellipse cx="360" cy="189" rx="52" ry="16"/>
+                <ellipse cx="424" cy="197" rx="46" ry="14"/>
+              </g>
+              <g class="scloud scloud-front" fill="#26314a">
+                <ellipse cx="280" cy="213" rx="40" ry="13"/>
+                <ellipse cx="344" cy="219" rx="50" ry="15"/>
+                <ellipse cx="416" cy="212" rx="42" ry="13"/>
+                <ellipse cx="466" cy="221" rx="34" ry="12"/>
+              </g>
+              <path id="bolt-1" d="M330 222 l-12 34 h10 l-18 44 26 -30 h-9 l16 -32 z" fill="#8dfab0"/>
+              <path id="bolt-2" d="M408 226 l-10 30 h9 l-16 40 23 -27 h-8 l14 -28 z" fill="#c8b0ff"/>
+              <rect id="flash-green" x="256" y="176" width="208" height="248" fill="#9dffc4"/>
+              <rect id="flash-purple" x="256" y="176" width="208" height="248" fill="#cbb1ff"/>
             </g>
           </g>
           <!-- casement sashes (open on second click) -->
@@ -154,12 +167,16 @@
           <circle cx="222" cy="150" r="6" fill="#9c7943"/><circle cx="498" cy="150" r="6" fill="#9c7943"/>
           <!-- curtains (open on first click) -->
           <g class="curtain" id="curtain-l">
-            <path d="M238 154 h126 v290 q-32 8 -63 0 q-32 8 -63 0 z" fill="#cf8a6b"/>
-            <path d="M262 158 q-4 140 2 282 M288 158 q4 140 -2 282 M314 158 q-4 140 2 282 M340 158 q4 140 -2 282" stroke="#b97a5c" stroke-width="2.5" fill="none" opacity="0.6"/>
+            <g class="curtain-fab" id="fab-l">
+              <path d="M238 154 h126 v290 q-32 8 -63 0 q-32 8 -63 0 z" fill="#cf8a6b"/>
+              <path d="M262 158 q-4 140 2 282 M288 158 q4 140 -2 282 M314 158 q-4 140 2 282 M340 158 q4 140 -2 282" stroke="#b97a5c" stroke-width="2.5" fill="none" opacity="0.6"/>
+            </g>
           </g>
           <g class="curtain" id="curtain-r">
-            <path d="M482 154 h-126 v290 q32 8 63 0 q32 8 63 0 z" fill="#cf8a6b"/>
-            <path d="M380 158 q4 140 -2 282 M406 158 q-4 140 2 282 M432 158 q4 140 -2 282 M458 158 q-4 140 2 282" stroke="#b97a5c" stroke-width="2.5" fill="none" opacity="0.6"/>
+            <g class="curtain-fab" id="fab-r">
+              <path d="M482 154 h-126 v290 q32 8 63 0 q32 8 63 0 z" fill="#cf8a6b"/>
+              <path d="M380 158 q4 140 -2 282 M406 158 q-4 140 2 282 M432 158 q4 140 -2 282 M458 158 q-4 140 2 282" stroke="#b97a5c" stroke-width="2.5" fill="none" opacity="0.6"/>
+            </g>
           </g>
         </g>
 
@@ -336,14 +353,16 @@
         <ellipse cx="360" cy="790" rx="144" ry="36" fill="#c98f6f"/>
         <ellipse cx="360" cy="790" rx="77" ry="20" fill="#dcb197"/>
         <!-- yin-yang at rug center (click it 8 times…) -->
+        <g id="yy-ember" aria-hidden="true">
+          <ellipse class="yy-ember-green" cx="360" cy="790" rx="52" ry="17" fill="url(#portalGreen)"/>
+          <ellipse class="yy-ember-purple" cx="360" cy="790" rx="52" ry="17" fill="url(#portalPurple)"/>
+        </g>
         <g opacity="0.55" transform="translate(360 790) scale(1.3 0.55)">
-        <g id="yy-hint-wrap">
         <g id="hs-yinyang" class="hotspot hotspot-soft" tabindex="0" role="button" aria-label="The yin-yang at the center of the rug">
           <circle r="21" fill="transparent"/>
           <circle r="16" fill="#f2e9d4"/>
           <path d="M0 -16 a16 16 0 0 1 0 32 a8 8 0 0 1 0 -16 a8 8 0 0 0 0 -16" fill="#59503f"/>
           <circle cy="-8" r="2.6" fill="#59503f"/><circle cy="8" r="2.6" fill="#f2e9d4"/>
-        </g>
         </g>
         </g>
 
@@ -454,7 +473,7 @@
         <!-- ======================= PORTAL (hidden until the 8th click) ======================= -->
         <!-- darkens the room but leaves a bright hole over the unobstructed view
              (x 270–450 clears the open curtains and sashes at the window's edges) -->
-        <path id="room-dim" d="M0 0 h720 v900 h-720 z M270 176 h180 v248 h-180 z"
+        <path id="room-dim" d="M0 0 h720 v900 h-720 z M261 176 h197 v248 h-197 z"
               fill="#141026" fill-rule="evenodd" opacity="0" pointer-events="none"/>
         <g id="portal" aria-hidden="true">
           <!-- pulsing green/purple glow over the rug -->

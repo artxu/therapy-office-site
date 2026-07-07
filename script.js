@@ -297,13 +297,13 @@
       return;
     }
     if (yyClicks >= 5) {
-      // clicks 5–7: something stirs, a little more each time
-      const wrap = document.getElementById("yy-hint-wrap");
-      wrap.style.setProperty("--hint-scale", (1.1 + (yyClicks - 4) * 0.15).toFixed(2));
-      wrap.classList.remove("yy-hint");
-      void wrap.getBoundingClientRect(); // restart the one-shot animation
-      wrap.classList.add("yy-hint");
-      setTimeout(() => wrap.classList.remove("yy-hint"), 600);
+      // clicks 5–7: a small ember of the portal, a little brighter each time
+      const ember = document.getElementById("yy-ember");
+      ember.style.setProperty("--ember", (0.35 + (yyClicks - 4) * 0.2).toFixed(2));
+      ember.classList.remove("ember");
+      void ember.getBoundingClientRect(); // restart the one-shot animation
+      ember.classList.add("ember");
+      setTimeout(() => ember.classList.remove("ember"), 1000);
     }
   }
 
