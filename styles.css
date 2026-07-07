@@ -133,7 +133,10 @@ body {
   width: min(560px, 94vw);
   border-radius: 18px;
   overflow: hidden;
-  filter: drop-shadow(0 26px 44px rgba(68, 58, 47, 0.22));
+  /* box-shadow, not filter: drop-shadow — a filter here makes the whole
+     frame re-rasterize (shadow flicker) whenever a hotspot's hover glow
+     changes inside the SVG */
+  box-shadow: 0 26px 44px -8px rgba(68, 58, 47, 0.28);
 }
 #room { display: block; width: 100%; height: auto; }
 
