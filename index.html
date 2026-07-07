@@ -552,7 +552,6 @@
         <rect x="0" y="0" width="720" height="900" filter="url(#grain)" fill="transparent" pointer-events="none"/>
       </svg>
 
-      <div id="hotspot-label" role="status" aria-hidden="true"></div>
     </div>
 
     <nav id="icon-nav" aria-label="Site sections">
@@ -640,9 +639,27 @@
   <template id="panel-contact">
     <h2 id="overlay-title">Contact</h2>
     <p class="lede">The hardest part is often the first call. I try to make it easy.</p>
+    <form id="contact-form" novalidate="false">
+      <label for="cf-name">Name</label>
+      <input id="cf-name" name="name" type="text" autocomplete="name" placeholder="First name is fine" />
+      <label for="cf-email">Email <span class="req">*</span></label>
+      <input id="cf-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com" />
+      <label for="cf-phone">Phone</label>
+      <input id="cf-phone" name="phone" type="tel" autocomplete="tel" placeholder="Optional" />
+      <label for="cf-kind">Kind of therapy</label>
+      <select id="cf-kind" name="kind">
+        <option value="Individual">Individual</option>
+        <option value="Couples">Couples</option>
+        <option value="Child">Child</option>
+      </select>
+      <label for="cf-msg">Message</label>
+      <textarea id="cf-msg" name="message" placeholder="A sentence or two is plenty."></textarea>
+      <div class="form-actions"><button type="submit" class="btn-primary">Send</button></div>
+      <p class="formnote">🔒 Sending opens your email app with this message addressed to me — nothing is stored on this site. Please save sensitive details for our conversation.</p>
+    </form>
     <div class="contact-grid">
       <div><h3>Reach me</h3>
-        <p>☎ (415) 555-0123<br/>✉ <a href="mailto:hello@example.com">hello@example.com</a></p>
+        <p>☎ (415) 555-0123<br/>✉ <a href="mailto:hello@artxutherapy.com">hello@artxutherapy.com</a></p>
         <p class="muted">I return calls and emails within one business day.</p>
       </div>
       <div><h3>The office</h3>
@@ -666,8 +683,6 @@
   <footer id="site-footer">
     <span>© <span id="year"></span> Art Xu · San Francisco, CA</span>
   </footer>
-
-  <div id="crisis-bar">In crisis or thinking of harming yourself? Call or text <b>988</b> — Suicide &amp; Crisis Lifeline, 24/7.</div>
 
   <script src="script.js" defer></script>
 </body>

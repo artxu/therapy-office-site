@@ -75,18 +75,24 @@ body {
 #room-hint b { color: var(--gate); }
 #room-hint.hidden { opacity: 0; }
 
-/* bottom icon nav */
+/* icon nav, fixed to the bottom of the viewport */
 #icon-nav {
+  position: fixed;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  max-width: 94vw;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin: 1.1rem auto 0.4rem;
   padding: 0.35rem 0.6rem;
-  background: #fbf7ec;
+  background: rgba(251, 247, 236, 0.92);
+  backdrop-filter: blur(6px);
   border: 1.5px solid var(--cream-deep);
   border-radius: 999px;
-  box-shadow: 0 8px 24px -14px rgba(68, 58, 47, 0.4);
+  box-shadow: 0 8px 24px -10px rgba(68, 58, 47, 0.45);
 }
 #icon-nav button {
   display: flex;
@@ -533,26 +539,6 @@ body.portal-active #hide-eyes {
   transform: scale(1.04);
 }
 
-/* floating label */
-#hotspot-label {
-  position: absolute;
-  pointer-events: none;
-  padding: 0.35rem 0.85rem;
-  background: rgba(68, 58, 47, 0.92);
-  color: var(--cream);
-  font-family: var(--serif);
-  font-size: 0.95rem;
-  border-radius: 999px;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translate(-50%, 6px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  z-index: 5;
-}
-#hotspot-label.show {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
 
 /* ---------------- overlay ---------------- */
 #overlay { position: fixed; inset: 0; z-index: 50; }
@@ -722,6 +708,47 @@ body.portal-active #hide-eyes {
 }
 .btn-link:hover, .btn-link:focus-visible { text-decoration: underline; outline: none; }
 
+/* contact form */
+#contact-form {
+  margin-bottom: 1.6rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1.5px dashed var(--cream-deep);
+}
+#contact-form label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin: 0.85rem 0 0.3rem;
+  color: var(--ink);
+}
+#contact-form .req { color: var(--gate); }
+#contact-form input,
+#contact-form select,
+#contact-form textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid var(--cream-deep);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  background: #fff;
+  color: var(--ink);
+}
+#contact-form input:focus,
+#contact-form select:focus,
+#contact-form textarea:focus {
+  outline: none;
+  border-color: var(--sage);
+  box-shadow: 0 0 0 4px rgba(122, 147, 118, 0.18);
+}
+#contact-form textarea { min-height: 92px; resize: vertical; }
+.form-actions { margin-top: 1.1rem; }
+.formnote {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  margin-top: 0.7rem;
+}
+
 /* contact */
 .contact-grid {
   display: grid;
@@ -792,25 +819,15 @@ body.portal-active #hide-eyes {
   font-style: italic;
 }
 
-/* ---------------- footer & crisis bar ---------------- */
+/* ---------------- footer ---------------- */
 #site-footer {
   display: flex;
   justify-content: center;
-  padding: 0.9rem 2rem 3rem;
+  /* bottom padding clears the fixed icon nav */
+  padding: 0.9rem 2rem 4.5rem;
   font-size: 0.78rem;
   color: var(--ink-soft);
 }
-#crisis-bar {
-  position: fixed;
-  left: 0; right: 0; bottom: 0;
-  z-index: 40;
-  background: #e9c983;
-  color: #4a3a12;
-  font-size: 0.8rem;
-  text-align: center;
-  padding: 0.45rem 1rem;
-}
-#crisis-bar b { font-weight: 700; }
 
 /* ---------------- reduced motion ---------------- */
 @media (prefers-reduced-motion: reduce) {

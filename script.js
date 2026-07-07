@@ -63,25 +63,10 @@
     "hs-cat": "cat",
   };
 
-  const label = document.getElementById("hotspot-label");
-  const frame = document.getElementById("room-frame");
-
-  function showLabel(hotspot) {
-    const text = LABELS[hotspot.id];
-    if (!text) return;
-    const hb = hotspot.getBoundingClientRect();
-    const fb = frame.getBoundingClientRect();
-    label.textContent = text;
-    const half = label.offsetWidth / 2 || 60;
-    const x = hb.left - fb.left + hb.width / 2;
-    label.style.left = Math.min(Math.max(x, half + 6), fb.width - half - 6) + "px";
-    const above = hb.top - fb.top - 38;
-    label.style.top = Math.max(8, above) + "px";
-    label.classList.add("show");
-  }
-  function hideLabel() {
-    label.classList.remove("show");
-  }
+  /* hover labels removed by request — stubs keep the call sites simple;
+     LABELS still feeds the aria-labels for assistive tech */
+  function showLabel() {}
+  function hideLabel() {}
 
   function activate(hs) {
     if (portalRunning) return;
@@ -94,10 +79,6 @@
   }
 
   document.querySelectorAll(".hotspot").forEach((hs) => {
-    hs.addEventListener("mouseenter", () => showLabel(hs));
-    hs.addEventListener("mouseleave", hideLabel);
-    hs.addEventListener("focus", () => showLabel(hs));
-    hs.addEventListener("blur", hideLabel);
     hs.addEventListener("click", () => activate(hs));
     hs.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
@@ -363,6 +344,29 @@
   content.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-panel]");
     if (btn) openPanel(btn.dataset.panel);
+  });
+
+  /* contact form: composes the email and opens the visitor's mail app
+     addressed to the practice — nothing is stored or sent to a server */
+  content.addEventListener("submit", (e) => {
+    if (e.target.id !== "contact-form") return;
+    e.preventDefault();
+    const val = (id) => (content.querySelector(id)?.value || "").trim();
+    const name = val("#cf-name");
+    const kind = val("#cf-kind");
+    const subject = "Website inquiry — " + kind.toLowerCase() + " therapy" + (name ? " — " + name : "");
+    const body =
+      "Name: " + (name || "—") +
+      "\nEmail: " + val("#cf-email") +
+      "\nPhone: " + (val("#cf-phone") || "—") +
+      "\nKind of therapy: " + kind +
+      "\n\n" + val("#cf-msg");
+    window.location.href =
+      "mailto:hello@artxutherapy.com?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+    const btn = e.target.querySelector("button[type=submit]");
+    btn.textContent = "Opening your email app…";
+    setTimeout(() => (btn.textContent = "Send"), 4000);
   });
 
   /* ---------------- blog: markdown posts ----------------
