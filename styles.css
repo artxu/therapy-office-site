@@ -210,12 +210,14 @@ body[data-time="night"] .cloud ellipse { opacity: 0.25; }
 }
 
 /* ---------------- window easter egg ---------------- */
+/* fixed view-box origins: the fabric's flutter must not shift these
+   (a fill-box origin would move as the animated child grows the bbox) */
 .curtain {
   transition: transform 1.1s cubic-bezier(0.6, 0.05, 0.3, 1);
-  transform-box: fill-box;
+  transform-box: view-box;
 }
-#curtain-l { transform-origin: left center; }
-#curtain-r { transform-origin: right center; }
+#curtain-l { transform-origin: 238px 299px; }
+#curtain-r { transform-origin: 482px 299px; }
 body.curtains-open #curtain-l,
 body.curtains-open #curtain-r,
 body.portal-active #curtain-l,
@@ -385,9 +387,9 @@ body.portal-active #flash-purple { animation: flashp 4.2s linear infinite; }
 }
 @keyframes flashg {
   0%, 4%, 15%, 100% { opacity: 0; }
-  6% { opacity: 0.55; }
-  9% { opacity: 0.15; }
-  11% { opacity: 0.4; }
+  6% { opacity: 0.85; }
+  9% { opacity: 0.25; }
+  11% { opacity: 0.65; }
 }
 @keyframes boltp {
   0%, 52%, 63%, 100% { opacity: 0; }
@@ -397,9 +399,48 @@ body.portal-active #flash-purple { animation: flashp 4.2s linear infinite; }
 }
 @keyframes flashp {
   0%, 52%, 65%, 100% { opacity: 0; }
-  54% { opacity: 0.55; }
-  58% { opacity: 0.15; }
-  61% { opacity: 0.4; }
+  54% { opacity: 0.85; }
+  58% { opacity: 0.25; }
+  61% { opacity: 0.65; }
+}
+
+/* the strikes wash over the whole darkened room, in sync with the window */
+#room-flash-green, #room-flash-purple { opacity: 0; }
+body.portal-active #room-flash-green { animation: roomflashg 4.2s linear infinite; }
+body.portal-active #room-flash-purple { animation: roomflashp 4.2s linear infinite; }
+@keyframes roomflashg {
+  0%, 4%, 15%, 100% { opacity: 0; }
+  6% { opacity: 0.3; }
+  9% { opacity: 0.08; }
+  11% { opacity: 0.22; }
+}
+@keyframes roomflashp {
+  0%, 52%, 65%, 100% { opacity: 0; }
+  54% { opacity: 0.3; }
+  58% { opacity: 0.08; }
+  61% { opacity: 0.22; }
+}
+
+/* rain, two depths, seamless 260px loop */
+.rain line { stroke: #b9c9e2; stroke-linecap: round; }
+.rain-1 line { stroke-width: 2; opacity: 0.55; }
+.rain-2 line { stroke-width: 1.3; opacity: 0.3; }
+body.portal-active .rain-1 { animation: rainfall 0.65s linear infinite; }
+body.portal-active .rain-2 { animation: rainfall 1.05s linear infinite; }
+@keyframes rainfall {
+  from { transform: translateY(0); }
+  to   { transform: translateY(260px); }
+}
+
+/* wind gusts streaking through */
+.gust { opacity: 0; }
+body.portal-active .gust-1 { animation: gust 1.7s ease-out infinite; }
+body.portal-active .gust-2 { animation: gust 2.1s ease-out infinite; animation-delay: -0.8s; }
+body.portal-active .gust-3 { animation: gust 1.9s ease-out infinite; animation-delay: -1.4s; }
+@keyframes gust {
+  0% { transform: translateX(-210px); opacity: 0; }
+  20% { opacity: 0.55; }
+  100% { transform: translateX(250px); opacity: 0; }
 }
 
 /* the ocean turns choppy */
@@ -414,9 +455,9 @@ body.portal-active .wave-3 { animation-duration: 0.9s; animation-delay: -0.55s; 
 /* wind through the curtains: anchored at the inner-top corner, so only
    the outer edge billows and the hem drops — the inner edge (which meets
    the undimmed view) never moves */
-.curtain-fab { transform-box: fill-box; }
-#fab-l { transform-origin: right top; }
-#fab-r { transform-origin: left top; }
+.curtain-fab { transform-box: view-box; }
+#fab-l { transform-origin: 364px 154px; }
+#fab-r { transform-origin: 356px 154px; }
 body.portal-active #fab-l { animation: flutter 1.1s ease-in-out infinite alternate; }
 body.portal-active #fab-r { animation: flutter 1.35s ease-in-out infinite alternate; }
 @keyframes flutter {
@@ -787,6 +828,9 @@ body.portal-active #hide-eyes {
   body.portal-active .scloud-back, body.portal-active .scloud-front,
   body.portal-active #bolt-1, body.portal-active #bolt-2,
   body.portal-active #flash-green, body.portal-active #flash-purple,
+  body.portal-active #room-flash-green, body.portal-active #room-flash-purple,
+  body.portal-active .rain-1, body.portal-active .rain-2,
+  body.portal-active .gust-1, body.portal-active .gust-2, body.portal-active .gust-3,
   body.portal-active .wave, body.portal-active #fab-l, body.portal-active #fab-r,
   body.portal-active #hide-eyes,
   #yy-ember.ember .yy-ember-green, #yy-ember.ember .yy-ember-purple { animation: none; }

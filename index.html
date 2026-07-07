@@ -141,6 +141,35 @@
                 <ellipse cx="416" cy="212" rx="42" ry="13"/>
                 <ellipse cx="466" cy="221" rx="34" ry="12"/>
               </g>
+              <!-- rain: two depth layers, pattern period 260px for a seamless loop -->
+              <g class="rain rain-2">
+                <line x1="272" y1="-50" x2="266" y2="-33"/><line x1="296" y1="50" x2="290" y2="67"/>
+                <line x1="320" y1="-75" x2="314" y2="-58"/><line x1="344" y1="25" x2="338" y2="42"/>
+                <line x1="368" y1="-15" x2="362" y2="2"/><line x1="392" y1="65" x2="386" y2="82"/>
+                <line x1="416" y1="-55" x2="410" y2="-38"/><line x1="440" y1="35" x2="434" y2="52"/>
+                <line x1="464" y1="-25" x2="458" y2="-8"/>
+                <line x1="272" y1="210" x2="266" y2="227"/><line x1="296" y1="310" x2="290" y2="327"/>
+                <line x1="320" y1="185" x2="314" y2="202"/><line x1="344" y1="285" x2="338" y2="302"/>
+                <line x1="368" y1="245" x2="362" y2="262"/><line x1="392" y1="325" x2="386" y2="342"/>
+                <line x1="416" y1="205" x2="410" y2="222"/><line x1="440" y1="295" x2="434" y2="312"/>
+                <line x1="464" y1="235" x2="458" y2="252"/>
+              </g>
+              <g class="rain rain-1">
+                <line x1="260" y1="-60" x2="254" y2="-43"/><line x1="284" y1="30" x2="278" y2="47"/>
+                <line x1="308" y1="-20" x2="302" y2="-3"/><line x1="332" y1="70" x2="326" y2="87"/>
+                <line x1="356" y1="-45" x2="350" y2="-28"/><line x1="380" y1="45" x2="374" y2="62"/>
+                <line x1="404" y1="-70" x2="398" y2="-53"/><line x1="428" y1="20" x2="422" y2="37"/>
+                <line x1="452" y1="-35" x2="446" y2="-18"/>
+                <line x1="260" y1="200" x2="254" y2="217"/><line x1="284" y1="290" x2="278" y2="307"/>
+                <line x1="308" y1="240" x2="302" y2="257"/><line x1="332" y1="330" x2="326" y2="347"/>
+                <line x1="356" y1="215" x2="350" y2="232"/><line x1="380" y1="305" x2="374" y2="322"/>
+                <line x1="404" y1="190" x2="398" y2="207"/><line x1="428" y1="280" x2="422" y2="297"/>
+                <line x1="452" y1="225" x2="446" y2="242"/>
+              </g>
+              <!-- wind gusts sweeping across -->
+              <path class="gust gust-1" d="M244 252 q18 -5 36 0 t36 0" fill="none" stroke="#cfe0f2" stroke-width="2" stroke-linecap="round"/>
+              <path class="gust gust-2" d="M252 286 q16 -4 32 0 t32 0" fill="none" stroke="#cfe0f2" stroke-width="1.8" stroke-linecap="round"/>
+              <path class="gust gust-3" d="M248 316 q20 -5 40 0 t40 0" fill="none" stroke="#cfe0f2" stroke-width="2.2" stroke-linecap="round"/>
               <path id="bolt-1" d="M330 222 l-12 34 h10 l-18 44 26 -30 h-9 l16 -32 z" fill="#8dfab0"/>
               <path id="bolt-2" d="M408 226 l-10 30 h9 l-16 40 23 -27 h-8 l14 -28 z" fill="#c8b0ff"/>
               <rect id="flash-green" x="256" y="176" width="208" height="248" fill="#9dffc4"/>
@@ -476,6 +505,9 @@
         <path id="room-dim" d="M0 0 h720 v900 h-720 z M261 176 h197 v248 h-197 z"
               fill="#141026" fill-rule="evenodd" opacity="0" pointer-events="none"/>
         <g id="portal" aria-hidden="true">
+          <!-- lightning washes over the whole darkened room -->
+          <rect id="room-flash-green" x="0" y="0" width="720" height="900" fill="#9dffc4" pointer-events="none"/>
+          <rect id="room-flash-purple" x="0" y="0" width="720" height="900" fill="#cbb1ff" pointer-events="none"/>
           <!-- pulsing green/purple glow over the rug -->
           <ellipse class="pglow pglow-green" cx="360" cy="790" rx="252" ry="66" fill="url(#portalGreen)"/>
           <ellipse class="pglow pglow-purple" cx="360" cy="790" rx="252" ry="66" fill="url(#portalPurple)"/>
