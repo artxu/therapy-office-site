@@ -356,8 +356,11 @@ body.portal-active .ring-b { animation: portalspin-rev 3s linear infinite; }
 /* days streak past the window (the static sun/moon steps aside) */
 #sunmoon { transition: opacity 0.6s ease; }
 body.portal-active #sunmoon { opacity: 0; }
-#portal-sky { opacity: 0; }
-body.portal-active #portal-sky { opacity: 1; transition: opacity 0.8s ease; }
+#portal-sky { opacity: 0; transition: opacity 0.8s ease; }
+body.portal-active #portal-sky { opacity: 1; }
+
+/* the bird flees while the portal runs, and returns after */
+body.portal-active #bird-pos { opacity: 0; }
 #p-night, #p-sun, #p-moon { opacity: 0; }
 body.portal-active #p-night { animation: pnight 1.3s ease-in-out infinite; }
 body.portal-active #p-sun { animation: pcross 1.3s linear infinite; }
@@ -381,7 +384,6 @@ body.portal-active #cat-pos {
   opacity: 0;
   transition: transform 0.55s cubic-bezier(0.35, 1.3, 0.5, 1), opacity 0.25s ease 0.5s;
 }
-#cat-pos.snap { transition: none; }
 #hide-eyes { opacity: 0; transform-box: fill-box; transform-origin: center; }
 body.portal-active #hide-eyes {
   opacity: 1;
@@ -392,18 +394,6 @@ body.portal-active #hide-eyes {
   0%, 88%, 100% { transform: scaleY(1); }
   93% { transform: scaleY(0.1); }
 }
-
-/* fade to white, and back */
-#whiteout {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  background: #fdfaf2;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.9s ease;
-}
-body.portal-white #whiteout { opacity: 1; }
 
 /* clicks 5–7: something stirs */
 #yy-hint-wrap { transform-box: fill-box; transform-origin: center; }
@@ -745,7 +735,7 @@ body.portal-white #whiteout { opacity: 1; }
   #yy-hint-wrap.yy-hint { animation: none; }
   body.portal-active .pglow-green { opacity: 0.7; }
   body.portal-active #p-sun { opacity: 1; }
-  #room-dim, #portal, #whiteout, body.portal-active #cat-pos { transition: none; }
+  #room-dim, #portal, body.portal-active #cat-pos { transition: none; }
   .hotspot, .hotspot-soft { transition: none; }
   #overlay-scrim, #overlay-card { animation: none; }
 }

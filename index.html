@@ -452,8 +452,9 @@
         </g>
 
         <!-- ======================= PORTAL (hidden until the 8th click) ======================= -->
-        <!-- darkens the room but leaves a bright hole over the view through the window -->
-        <path id="room-dim" d="M0 0 h720 v900 h-720 z M256 176 h208 v248 h-208 z"
+        <!-- darkens the room but leaves a bright hole over the unobstructed view
+             (x 270–450 clears the open curtains and sashes at the window's edges) -->
+        <path id="room-dim" d="M0 0 h720 v900 h-720 z M270 176 h180 v248 h-180 z"
               fill="#141026" fill-rule="evenodd" opacity="0" pointer-events="none"/>
         <g id="portal" aria-hidden="true">
           <!-- pulsing green/purple glow over the rug -->
@@ -498,7 +499,6 @@
       </svg>
 
       <div id="hotspot-label" role="status" aria-hidden="true"></div>
-      <div id="whiteout" aria-hidden="true"></div>
     </div>
 
     <nav id="icon-nav" aria-label="Site sections">

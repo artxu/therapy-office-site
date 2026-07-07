@@ -285,7 +285,7 @@
   /* ---------------- the yin-yang portal ----------------
      eight patient clicks on the rug's center: the vortex spins,
      the room darkens, days streak past the window, Boston rides
-     it out under the couch — then white, and nothing happened. */
+     it out under the couch — then it all settles back to normal. */
   let yyClicks = 0;
   let portalRunning = false;
 
@@ -312,34 +312,12 @@
     hideLabel();
     document.body.classList.add("portal-active");
     const T = reducedMotion() ? 0.35 : 1;
-    setTimeout(() => document.body.classList.add("portal-white"), 6200 * T);
+    // the portal closes on its own; every element glides back to
+    // exactly its pre-portal state via its normal transitions
     setTimeout(() => {
       document.body.classList.remove("portal-active");
-      resetRoom();
-    }, 7200 * T);
-    setTimeout(() => {
-      document.body.classList.remove("portal-white");
       portalRunning = false;
-    }, 7900 * T);
-  }
-
-  function resetRoom() {
-    // as if nothing had happened (tidied papers stay tidied)
-    clearTimeout(landTimer);
-    birdLanded = false;
-    closingWindow = false;
-    windowState = 0;
-    birdState = 0;
-    document.body.classList.remove("curtains-open", "window-open", "bird-here");
-    document.getElementById("bird-pos").classList.remove("bird-shelf", "bird-out");
-    LABELS["bird"] = "A little visitor";
-    LABELS["hs-window"] = "Open the curtains";
-    document.getElementById("hs-window").setAttribute("aria-label", "The window — click to open the curtains");
-    resetCat();
-    // snap the cat home instantly while the screen is white
-    const catPos = document.getElementById("cat-pos");
-    catPos.classList.add("snap");
-    setTimeout(() => catPos.classList.remove("snap"), 150);
+    }, 6800 * T);
   }
 
   /* ---------------- overlay ---------------- */
