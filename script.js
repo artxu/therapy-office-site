@@ -43,7 +43,8 @@
     "hs-welcome": "Welcome · have a seat",
     "hs-about": "About me · the diploma",
     "hs-services": "Services & fees · the plant shelf",
-    "hs-blog": "Writing · the bookshelf",
+    "hs-blog": "Writing · the top shelf",
+    "hs-resources": "Client resources · the middle shelf",
     "hs-contact": "Contact · the calendar",
     "hs-cat": "Boston (do not disturb)",
     "hs-paper-1": "A crumpled note",
@@ -57,6 +58,7 @@
     "hs-about": "about",
     "hs-services": "services",
     "hs-blog": "blog",
+    "hs-resources": "resources",
     "hs-contact": "contact",
     "hs-cat": "cat",
   };

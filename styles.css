@@ -848,10 +848,11 @@ body.portal-active #hide-eyes {
   .cards { grid-template-columns: 1fr; }
   /* on touch there's no hover — gently pulse hotspots instead */
   .hotspot { animation: invite 5s ease-in-out infinite; }
-  #hs-about    { animation-delay: 0.6s; }
-  #hs-blog     { animation-delay: 1.2s; }
-  #hs-services { animation-delay: 1.8s; }
-  #hs-contact  { animation-delay: 2.4s; }
+  #hs-about     { animation-delay: 0.6s; }
+  #hs-blog      { animation-delay: 1.2s; }
+  #hs-services  { animation-delay: 1.8s; }
+  #hs-contact   { animation-delay: 2.4s; }
+  #hs-resources { animation-delay: 3s; }
 }
 @keyframes invite {
   0%, 88%, 100% { transform: scale(1); }
