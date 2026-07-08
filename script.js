@@ -335,9 +335,39 @@
     if (e.key === "Escape" && !overlay.hidden) closePanel();
   });
 
-  /* icon nav */
-  document.querySelectorAll("#icon-nav button").forEach((btn) => {
-    btn.addEventListener("click", () => openPanel(btn.dataset.panel));
+  /* hamburger menu */
+  const navToggle = document.getElementById("nav-toggle");
+  const iconNav = document.getElementById("icon-nav");
+  function setMenu(open) {
+    document.body.classList.toggle("nav-open", open);
+    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+  navToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setMenu(!document.body.classList.contains("nav-open"));
+  });
+  iconNav.querySelectorAll("button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      setMenu(false);
+      openPanel(btn.dataset.panel);
+    });
+  });
+  // close on outside click / Escape
+  document.addEventListener("click", (e) => {
+    if (
+      document.body.classList.contains("nav-open") &&
+      !iconNav.contains(e.target) &&
+      e.target !== navToggle
+    ) {
+      setMenu(false);
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && document.body.classList.contains("nav-open")) {
+      setMenu(false);
+      navToggle.focus();
+    }
   });
 
   /* buttons inside overlay content (e.g. welcome panel actions) */
