@@ -84,10 +84,8 @@ body {
   width: 46px;
   height: 46px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
   background: rgba(251, 247, 236, 0.92);
   backdrop-filter: blur(6px);
   border: 1.5px solid var(--cream-deep);
@@ -98,17 +96,16 @@ body {
 }
 #nav-toggle:hover { background: var(--cream-deep); }
 #nav-toggle:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
-#nav-toggle .bar {
-  width: 22px;
-  height: 2.5px;
-  border-radius: 2px;
-  background: var(--ink);
-  transition: transform 0.28s ease, opacity 0.2s ease;
+#nav-toggle::before {
+  content: "\2630"; /* ☰ */
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--ink);
 }
-/* bars morph into an X when open */
-body.nav-open #nav-toggle .bar:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-body.nav-open #nav-toggle .bar:nth-child(2) { opacity: 0; }
-body.nav-open #nav-toggle .bar:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+body.nav-open #nav-toggle::before {
+  content: "\00d7"; /* × */
+  font-size: 1.7rem;
+}
 
 /* dropdown menu under the toggle */
 #icon-nav {
