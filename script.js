@@ -17,6 +17,18 @@
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
+  /* on tall/narrow phone screens, give the room a taller viewBox so it
+     fills the display — the furniture stays put and gains headroom above
+     and foreground floor below (the wall/floor art already extends past
+     y 0–900 to cover this) */
+  const roomSvg = document.getElementById("room");
+  const tallScreen = matchMedia("(max-width: 700px)");
+  function setRoomViewBox(mq) {
+    roomSvg.setAttribute("viewBox", mq.matches ? "0 -140 720 1180" : "0 0 720 900");
+  }
+  setRoomViewBox(tallScreen);
+  tallScreen.addEventListener("change", setRoomViewBox);
+
   /* the wall calendar shows the visitor's actual month, with today circled */
   function setCalendar() {
     const now = new Date();
