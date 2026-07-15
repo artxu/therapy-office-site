@@ -87,6 +87,8 @@
         </g>
 
         <!-- ======================= WINDOW WITH CURTAINS (above couch, click to open) ======================= -->
+        <!-- lifted up so the perched bird's head clears the window's lower edge -->
+        <g transform="translate(0,-40)">
         <g id="hs-window" class="hotspot" tabindex="0" role="button" aria-label="The window — click to open the curtains">
           <!-- frame -->
           <rect x="240" y="160" width="240" height="288" rx="6" fill="#c9a26b"/>
@@ -213,6 +215,7 @@
               <path d="M380 158 q4 140 -2 282 M406 158 q-4 140 2 282 M432 158 q4 140 -2 282 M458 158 q-4 140 2 282" stroke="#b97a5c" stroke-width="2.5" fill="none" opacity="0.6"/>
             </g>
           </g>
+        </g>
         </g>
 
         <!-- ======================= PLANT SHELF (Services) ======================= -->
@@ -424,18 +427,6 @@
           </g>
         </g>
 
-        <!-- ======================= FLOOR PLANT (foreground, right) ======================= -->
-        <g transform="translate(-100,324) scale(0.9)">
-          <g id="floorplant" class="sway-slow" style="transform-origin: 830px 560px;">
-            <path d="M830 540 C 800 500 786 460 796 424 C 816 456 826 500 830 540" fill="#5d7f59"/>
-            <path d="M830 540 C 860 500 874 460 864 424 C 844 456 834 500 830 540" fill="#6e8f68"/>
-            <path d="M830 540 C 824 496 824 452 830 416 C 838 452 838 500 830 540" fill="#7d9c74"/>
-            <path d="M830 542 C 812 516 800 490 798 464 C 814 486 824 516 830 542" fill="#87a084"/>
-          </g>
-          <path d="M806 540 h48 l-7 34 h-34 z" fill="#b96a45"/>
-          <path d="M806 540 h48 l-2 10 h-44 z" fill="#a8552f"/>
-        </g>
-
         <!-- ======================= CAT (easter egg) ======================= -->
         <g transform="translate(-95,127)">
         <g id="cat-pos">
@@ -517,7 +508,7 @@
         <!-- ======================= PORTAL (hidden until the 8th click) ======================= -->
         <!-- darkens the room but leaves a bright hole over the unobstructed view
              (x 270–450 clears the open curtains and sashes at the window's edges) -->
-        <path id="room-dim" d="M0 -260 h720 v1420 h-720 z M261 176 h197 v248 h-197 z"
+        <path id="room-dim" d="M0 -260 h720 v1420 h-720 z M261 136 h197 v248 h-197 z"
               fill="#141026" fill-rule="evenodd" opacity="0" pointer-events="none"/>
         <g id="portal" aria-hidden="true">
           <!-- lightning washes over the whole darkened room -->

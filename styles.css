@@ -907,7 +907,12 @@ body.portal-active #hide-eyes {
 @media (max-width: 700px) {
   #site-header { padding: 0.9rem 1rem 0.4rem; }
   #scene-hint { font-size: 0.8rem; }
-  #overlay-card { padding: 1.6rem 1.3rem 1.4rem; }
+  #overlay-card {
+    padding: 1.6rem 1.3rem 1.4rem;
+    /* nudge down so the close button clears the fixed hamburger (top-right) */
+    transform: translate(-50%, calc(-50% + 1.9rem));
+    max-height: 80vh;
+  }
   .cards { grid-template-columns: 1fr; }
   /* on touch there's no hover — gently pulse hotspots instead */
   .hotspot { animation: invite 5s ease-in-out infinite; }

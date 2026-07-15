@@ -286,20 +286,19 @@
 
   function yinyangClick() {
     yyClicks += 1;
-    if (yyClicks >= 8) {
+    if (yyClicks >= 3) {
+      // third click opens the portal
       yyClicks = 0;
       runPortal();
       return;
     }
-    if (yyClicks >= 5) {
-      // clicks 5–7: a small ember of the portal, a little brighter each time
-      const ember = document.getElementById("yy-ember");
-      ember.style.setProperty("--ember", (0.35 + (yyClicks - 4) * 0.2).toFixed(2));
-      ember.classList.remove("ember");
-      void ember.getBoundingClientRect(); // restart the one-shot animation
-      ember.classList.add("ember");
-      setTimeout(() => ember.classList.remove("ember"), 1000);
-    }
+    // clicks 1–2: a small ember of the portal, brighter the second time
+    const ember = document.getElementById("yy-ember");
+    ember.style.setProperty("--ember", (0.4 + (yyClicks - 1) * 0.3).toFixed(2));
+    ember.classList.remove("ember");
+    void ember.getBoundingClientRect(); // restart the one-shot animation
+    ember.classList.add("ember");
+    setTimeout(() => ember.classList.remove("ember"), 1000);
   }
 
   function runPortal() {
