@@ -86,6 +86,7 @@
     else if (hs.id === "hs-cat") catClick(hs);
     else if (hs.id === "bird") birdClick();
     else if (hs.id === "hs-yinyang") yinyangClick();
+    else if (hs.id === "hs-basket") basketClick();
     else if (hs.id.startsWith("hs-paper-")) openPaper(hs.id.slice(-1), hs);
     else openPanel(PANEL_FOR[hs.id]);
   }
@@ -101,17 +102,48 @@
   });
 
   /* ---------------- loose papers & wastebasket ----------------
-     each paper opens a quote; "Tidy up" tosses it in the basket,
-     which fills by thirds until all three papers are cleared */
-  const PAPER_QUOTES = {
-    1: { quote: "When I let go of what I am, I become what I might be.", by: "Lao Tzu" },
-    2: { quote: "The wound is the place where the light enters you.", by: "Rumi" },
-    3: { quote: "You can't stop the waves, but you can learn to surf.", by: "Jon Kabat-Zinn" },
-  };
-  let tidied = 0;
+     the three papers each draw a random quote from the library;
+     "Tidy up" tosses a paper in the basket. Clicking the basket
+     scatters the tidied papers back out with fresh quotes. Quotes
+     are dealt from a shuffled deck, so none repeats until the whole
+     library has been seen — then the deck reshuffles.
+
+     ADD YOUR QUOTES HERE — one { quote: "...", by: "..." } line each. */
+  const QUOTE_LIBRARY = [
+    { quote: "Every life is a piece of art, put together with all means available.", by: "Pierre Janet" },
+    { quote: "It is no measure of health to be well adjusted to a profoundly sick society.", by: "Krishnamurti" },
+    { quote: "We begin in the dark, by the light of the moon.", by: "Jon Kabat-Zinn" },
+    { quote: "When I let go of what I am, I become what I might be.", by: "Lao Tzu" },
+    { quote: "The curious paradox is that when I accept myself just as I am, then I can change.", by: "Carl Rogers" },
+    { quote: "The wound is the place where the light enters you.", by: "Rumi" },
+    { quote: "What is to give light must endure burning.", by: "Viktor Frankl" },
+    { quote: "Nature does not hurry, yet everything is accomplished.", by: "Lao Tzu" },
+  ];
+
+  let quoteDeck = [];
+  function shuffleDeck() {
+    quoteDeck = QUOTE_LIBRARY.map((_, i) => i);
+    for (let i = quoteDeck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [quoteDeck[i], quoteDeck[j]] = [quoteDeck[j], quoteDeck[i]];
+    }
+  }
+
+  const paperQuote = { 1: null, 2: null, 3: null };
+  function drawQuote(n) {
+    if (!quoteDeck.length) shuffleDeck();
+    // avoid dealing a quote that's already lying on the floor
+    const onFloor = new Set(Object.values(paperQuote).filter((v) => v !== null));
+    let pos = quoteDeck.findIndex((i) => !onFloor.has(i));
+    if (pos === -1) pos = 0;
+    paperQuote[n] = quoteDeck.splice(pos, 1)[0];
+  }
+  [1, 2, 3].forEach(drawQuote);
+
+  const tidiedPapers = new Set();
 
   function openPaper(n, hs) {
-    const q = PAPER_QUOTES[n];
+    const q = QUOTE_LIBRARY[paperQuote[n]];
     if (!q) return;
     lastFocus = document.activeElement;
     content.innerHTML =
@@ -121,8 +153,8 @@
       '<div class="welcome-actions"><button class="btn-primary" id="tidy-btn">Tidy up</button></div>';
     content.querySelector("#tidy-btn").addEventListener("click", () => {
       hs.parentElement.style.display = "none";
-      tidied += 1;
-      const ball = document.getElementById("basket-ball-" + tidied);
+      tidiedPapers.add(n);
+      const ball = document.getElementById("basket-ball-" + tidiedPapers.size);
       if (ball) ball.classList.add("in-basket");
       closePanel();
     });
@@ -132,6 +164,25 @@
     document.body.style.overflow = "hidden";
     card.focus();
     hideLabel();
+  }
+
+  /* clicking the basket scatters the tidied notes back out,
+     each with a freshly dealt quote */
+  function basketClick() {
+    if (!tidiedPapers.size) return;
+    tidiedPapers.forEach((n) => {
+      drawQuote(n);
+      const hs = document.getElementById("hs-paper-" + n);
+      hs.parentElement.style.display = "";
+      hs.classList.remove("paper-pop");
+      void hs.getBoundingClientRect(); // restart the one-shot animation
+      hs.classList.add("paper-pop");
+      setTimeout(() => hs.classList.remove("paper-pop"), 700);
+    });
+    tidiedPapers.clear();
+    [1, 2, 3].forEach((i) =>
+      document.getElementById("basket-ball-" + i).classList.remove("in-basket")
+    );
   }
 
   /* ---------------- Boston's moods ----------------
@@ -335,9 +386,18 @@
     if (name === "blog") initBlog();
   }
   function closePanel() {
+    // Move focus out of the overlay BEFORE hiding it. Otherwise, when the
+    // overlay (or a tidied paper) is display:none'd while it still holds
+    // focus, Safari relocates focus to <body> and scrolls the page to the
+    // top. Blurring first, and only restoring focus to a still-visible
+    // element with preventScroll, keeps the scroll position put.
+    const active = document.activeElement;
+    if (active && overlay.contains(active)) active.blur();
     overlay.hidden = true;
     document.body.style.overflow = "";
-    if (lastFocus) lastFocus.focus();
+    if (lastFocus && lastFocus.isConnected && lastFocus.getClientRects().length) {
+      lastFocus.focus({ preventScroll: true });
+    }
   }
 
   closeBtn.addEventListener("click", closePanel);
