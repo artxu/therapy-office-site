@@ -685,6 +685,8 @@ body.portal-active #hide-eyes {
   padding: 1rem 1.1rem;
 }
 .cards li p { margin: 0; font-size: 0.92rem; line-height: 1.55; }
+/* full-width cards, one per row (Client Resources) */
+.cards.cards-full { grid-template-columns: 1fr; }
 
 /* fees */
 .fees-heading {
