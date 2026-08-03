@@ -662,6 +662,19 @@ body.portal-active #hide-eyes {
   margin-top: 0;
 }
 .muted { color: var(--ink-soft); font-size: 0.9rem; }
+
+/* Boston's photo, above the text in his panel */
+.cat-photo {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin: 0.2rem 0 1.2rem;
+  border-radius: 14px;
+  border: 1px solid var(--redwood);
+  box-shadow: 0 10px 26px -14px rgba(40, 30, 20, 0.55);
+}
 .fineprint {
   font-size: 0.8rem;
   color: var(--ink-soft);
