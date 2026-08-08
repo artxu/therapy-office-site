@@ -675,6 +675,18 @@ body.portal-active #hide-eyes {
   border: 1px solid var(--redwood);
   box-shadow: 0 10px 26px -14px rgba(40, 30, 20, 0.55);
 }
+/* Art's photo, under the heading in the About panel */
+.me-photo {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 14px;
+  margin: 0.2rem 0 1.4rem;
+  border: 1px solid var(--redwood);
+  box-shadow: 0 10px 26px -14px rgba(40, 30, 20, 0.55);
+}
 .fineprint {
   font-size: 0.8rem;
   color: var(--ink-soft);
@@ -829,6 +841,9 @@ body.portal-active #hide-eyes {
   gap: 1.2rem;
 }
 .contact-grid a { color: var(--ocean); }
+/* let a long email wrap instead of pushing into the next column */
+.contact-grid > div { min-width: 0; }
+.contact-grid a { overflow-wrap: anywhere; }
 
 /* blog */
 #blog-list .post-link {

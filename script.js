@@ -226,6 +226,8 @@
 
   function cycleWindow() {
     if (closingWindow) return;
+    // the bird is still flying in — let it land before anything else
+    if (windowState === 2 && !birdLanded) return;
     const next = (windowState + 1) % 3;
     if (next === 0 && birdState < 2) {
       // the bird gets a head start: it flies out, then the window closes
