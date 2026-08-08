@@ -377,8 +377,18 @@
   function openPanel(name) {
     const tpl = document.getElementById("panel-" + name);
     if (!tpl) return;
+    // panels live in the page as real (hidden) DOM so search engines can read
+    // them; clone the section's children into the overlay
     lastFocus = document.activeElement;
-    content.replaceChildren(tpl.content.cloneNode(true));
+    content.replaceChildren(...[...tpl.cloneNode(true).childNodes]);
+    // give the dialog its accessible name from the cloned heading
+    const heading = content.querySelector(".panel-title");
+    if (heading) {
+      heading.id = "overlay-title";
+      card.setAttribute("aria-labelledby", "overlay-title");
+    } else {
+      card.removeAttribute("aria-labelledby");
+    }
     const hint = document.getElementById("room-hint");
     if (hint) hint.classList.add("hidden");
     overlay.hidden = false;

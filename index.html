@@ -3,18 +3,115 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Art Xu — therapy for complex trauma, attachment, and inner child healing in San Francisco. Step into the office." />
-  <title>Art Xu — A Quiet Room by the Bay</title>
+  <meta name="description" content="Online therapy for complex trauma, attachment, and inner child work with Art Xu, AMFT. Telehealth sessions for clients across California. Free 20-minute consultation." />
+  <title>Art Xu, AMFT — A Therapy Room by the Bay</title>
+  <link rel="canonical" href="https://artxutherapy.com/" />
+
+  <!-- link previews (texts, social, messaging apps) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://artxutherapy.com/" />
+  <meta property="og:site_name" content="Art Xu, AMFT" />
+  <meta property="og:title" content="Art Xu, AMFT — A Therapy Room by the Bay" />
+  <meta property="og:description" content="Online therapy for complex trauma, attachment, and inner child work. Telehealth sessions for clients across California. Free 20-minute consultation." />
+  <meta property="og:image" content="https://artxutherapy.com/assets/og-image.jpg" />
+  <meta property="og:image:alt" content="An illustrated therapy office with a couch, bookshelf, and a window looking out at the Golden Gate Bridge" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Art Xu, AMFT — A Therapy Room by the Bay" />
+  <meta name="twitter:description" content="Online therapy for complex trauma, attachment, and inner child work. Telehealth across California." />
+  <meta name="twitter:image" content="https://artxutherapy.com/assets/og-image.jpg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- structured data: helps search engines understand who this is and what is offered.
+       No street address on purpose — sessions are telehealth-only across California. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://artxutherapy.com/#art",
+        "name": "Art Xu",
+        "jobTitle": "Registered Associate Marriage and Family Therapist",
+        "url": "https://artxutherapy.com/",
+        "image": "https://artxutherapy.com/assets/art.jpg",
+        "email": "art@resonantsourcetherapy.co",
+        "telephone": "+1-415-625-3377",
+        "knowsAbout": [
+          "Complex developmental trauma",
+          "Attachment",
+          "Inner child work",
+          "Psychodrama",
+          "Somatic therapy",
+          "Nervous system regulation"
+        ],
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Registered Associate Marriage and Family Therapist",
+          "identifier": "154708",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "California Board of Behavioral Sciences"
+          }
+        }
+      },
+      {
+        "@type": ["ProfessionalService", "MedicalBusiness"],
+        "@id": "https://artxutherapy.com/#practice",
+        "name": "Art Xu, AMFT — Therapy",
+        "url": "https://artxutherapy.com/",
+        "image": "https://artxutherapy.com/assets/art.jpg",
+        "description": "Online therapy for complex developmental trauma, attachment, and inner child work, integrating psychodrama and somatic practices. Telehealth sessions for clients throughout California.",
+        "email": "art@resonantsourcetherapy.co",
+        "telephone": "+1-415-625-3377",
+        "founder": { "@id": "https://artxutherapy.com/#art" },
+        "employee": { "@id": "https://artxutherapy.com/#art" },
+        "areaServed": {
+          "@type": "State",
+          "name": "California"
+        },
+        "availableLanguage": "English",
+        "priceRange": "$$",
+        "currenciesAccepted": "USD",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Wednesday", "Thursday"],
+            "opens": "10:00",
+            "closes": "18:00"
+          }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Therapy services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": { "@type": "Service", "name": "Individual therapy session (50 minutes), via telehealth" },
+              "price": "150",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": { "@type": "Service", "name": "Initial consultation (20 minutes, by phone)" },
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          ]
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body data-time="day">
 
   <header id="site-header">
     <div class="wordmark">
-      <span class="wordmark-name">Art's Therapy Office</span>
+      <h1 class="wordmark-name">Art's Therapy Office</h1>
       <span class="wordmark-sub">Welcome! Feel free to explore. </span>
     </div>
   </header>
@@ -579,9 +676,13 @@
     </section>
   </div>
 
-  <!-- ======================= PANEL CONTENT ======================= -->
-  <template id="panel-welcome">
-    <h2 id="overlay-title">Come on in</h2>
+  <!-- ======================= PANEL CONTENT =======================
+       Real DOM (not <template>) so search engines can read it; hidden
+       until a click, exactly like tabs/accordions. openPanel() clones
+       from here. aria-hidden keeps screen readers from reading it twice. -->
+  <div id="panels" hidden aria-hidden="true">
+  <section id="panel-welcome">
+    <h2 class="panel-title">Come on in</h2>
     <p class="lede">I'm glad you are here.</p>
     <p>Hi, I'm Art 👋 — an AMFT working with developmental trauma, attachment repair, and inner child reparenting.</p>
     <p>Poke around the room to learn how I work: the diploma, the plants, the bookshelf, and the calendar all open. Please enjoy yourself. Pet the cat. Open the windows. Clean the room. Discover magic. </p>
@@ -589,11 +690,11 @@
       <button class="btn-primary" data-panel="contact">Book a free 20-min consult</button>
       <button class="btn-link" data-panel="services">See how I work →</button>
     </div>
-  </template>
+  </section>
 
-  <template id="panel-about">
-    <h2 id="overlay-title">Hi, I'm Art.</h2>
-    <img class="me-photo" src="assets/art.jpg" alt="Art Xu" onerror="this.style.display='none'" />
+  <section id="panel-about">
+    <h2 class="panel-title">Hi, I'm Art.</h2>
+    <img class="me-photo" src="assets/art.jpg" alt="Art Xu, Registered Associate Marriage and Family Therapist" onerror="this.style.display='none'" />
     <p>I was in my late twenties when it dawned on me that I needed help with my mental health. As the saying goes, you can't get away from yourself. And I sure tried, mostly by keeping myself busy with work and distractions. When I was tired of running, I started looking inwards, first through meditation, and then therapy. It was scary and painful, but it was better than being numb. Gradually, I felt the visceral reactive patterns behind how I perceive myself and how I relate to others. </p>
     <p>I relate to the descriptions of kids that had to grew up fast in response to distressing circumstances: a home that feels scary, earning care instead of receiving it, their needs rejected or ignored, losing themselves to becoming what their family needed. That kind of childhood leaves deeply wired reactive patterns. They live in the body and show up in the ways we approach relationships. They can compell us to act in ways that hurt us or those close to us.</p>
     <p>The patterns were good enough, adaptive enough, to get us to where we are now, but they also meant shutting off other aspects of ourselves that nevertheless yearns to be known... given the right time and place.</p>
@@ -601,10 +702,10 @@
     <p>Our therapy can be that: a place safe enough to remember and to experiment. We give our attention and support to whatever needs to be expressed, whether through words, or sounds, or movement.</p>
     <p>The room reflects how I think about this work: unhurried, warm, playful. It isn't forceful. It's about making room, letting your nervous system unfold, and trusting it knows what it needs to grow.</p>
     <p class="fineprint">Registered Associate Marriage and Family Therapist<br/>License Number: 154708<br/>Licensee Name: XU, AO<br/>Supervised by a Licensed Marriage and Family Therapist</p>
-  </template>
+  </section>
 
-  <template id="panel-services">
-    <h2 id="overlay-title">Services &amp; Fees</h2>
+  <section id="panel-services">
+    <h2 class="panel-title">Services &amp; Fees</h2>
     <ul class="cards">
       <li><h3>Attachment Repair</h3><p>Working with visceral reactions and distorted perspectives that come up when our needs for attachment are triggered. Primarily formed during the first two years of life, they are mostly unconscious and yet fundamentally influence the way we experience ourselves in relation to other people.</p></li>
       <li><h3>Inner Child Reparenting</h3><p>Gently meeting the younger parts that are still waiting for someone to show up, and giving them what they didn't get the first time: attunement, soothing, protection, delight.</p></li>
@@ -619,10 +720,10 @@
     </table>
     <p>I reserve a portion of my practice for <strong>sliding-scale clients</strong> who cannot afford my standard rate. If money is an issue, please still reach out to see if we can make it work.</p>
     <p>I am an out-of-network provider. I can provide a monthly superbill for insurance reimbursement, and I'm happy to walk you through how that works.</p>
-  </template>
+  </section>
 
-  <template id="panel-resources">
-    <h2 id="overlay-title">Client Resources</h2>
+  <section id="panel-resources">
+    <h2 class="panel-title">Client Resources</h2>
     <p class="lede">Tools and assessments we may use in our work together.</p>
     <p>These are instruments I sometimes share with clients — for reflection and conversation, not self-diagnosis. If you take one on your own, we can always talk through what it brought up together.</p>
     <ul class="cards cards-full">
@@ -630,20 +731,20 @@
       <li><h3><a href="https://quiz.attachmentproject.com" target="_blank" rel="noopener">Attachment Style Test</a></h3><p>A starting point for understanding your attachment style.</p></li>
     </ul>
     <p class="muted">This shelf is still being stocked — more resources coming soon.</p>
-  </template>
+  </section>
 
-  <template id="panel-blog">
-    <h2 id="overlay-title">Writing</h2>
+  <section id="panel-blog">
+    <h2 class="panel-title">Writing</h2>
     <p class="lede">Notes from the bookshelf — short essays on therapy, rest, and being a person.</p>
     <div id="blog-list"><p class="muted">Loading articles…</p></div>
     <article id="blog-article" hidden>
       <button id="blog-back">← All articles</button>
       <div id="blog-article-body"></div>
     </article>
-  </template>
+  </section>
 
-  <template id="panel-contact">
-    <h2 id="overlay-title">Contact</h2>
+  <section id="panel-contact">
+    <h2 class="panel-title">Contact</h2>
     <p class="lede">"And the day came when the risk to remain tight in a bud was more painful than the risk it took to blossom." - Anaïs Nin</p>
     <form id="contact-form" novalidate="false">
       <label for="cf-name">Name</label>
@@ -676,15 +777,17 @@
       </div>
     </div>
     <p class="fineprint">If you are in crisis, please call or text 988 (Suicide &amp; Crisis Lifeline) — support is available 24/7.</p>
-  </template>
+  </section>
 
-  <template id="panel-cat">
-    <h2 id="overlay-title">Boston</h2>
+  <section id="panel-cat">
+    <h2 class="panel-title">Boston</h2>
     <img class="cat-photo" src="assets/boston.jpg" alt="Boston, a black-and-white tuxedo cat" onerror="this.style.display='none'" />
     <p class="lede">Resident therapy cat and zen master. Unlicensed, but very experienced.</p>
     <p>Boston is a black-and-white shorthair who sometimes join our sessions. Specialties include: sitting on the laptop, purring at clinically significant moments, and modeling excellent boundaries. He is also living proof that you can wear a tuxedo every day and still be extremely relaxed.</p>
     <p class="muted">He likes receiving pets </p>
-  </template>
+  </section>
+
+  </div>
 
   <footer id="site-footer">
     <span>© <span id="year"></span> Art Xu · San Francisco, CA</span>

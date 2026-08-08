@@ -46,6 +46,8 @@ body {
   font-size: clamp(1.5rem, 3vw, 2rem);
   letter-spacing: 0.01em;
   display: block;
+  /* it's an <h1> for SEO — strip the UA margins so the header looks unchanged */
+  margin: 0;
 }
 .wordmark-sub {
   display: block;
