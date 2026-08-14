@@ -475,7 +475,7 @@
       "\nKind of therapy: " + kind +
       "\n\n" + val("#cf-msg");
     window.location.href =
-      "mailto:art@resonantsourcetherapy.co?subject=" + encodeURIComponent(subject) +
+      "mailto:hello@artxutherapy.com?subject=" + encodeURIComponent(subject) +
       "&body=" + encodeURIComponent(body);
     const btn = e.target.querySelector("button[type=submit]");
     btn.textContent = "Opening your email app…";
