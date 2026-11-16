@@ -1,5 +1,9 @@
-# What happens in the first few sessions?
-
+---
+layout: post
+title: "What happens in the first few sessions?"
+date: 2026-05-03
+summary: "Demystifying the first appointment for anyone who has been hovering over the 'send' button."
+---
 
 ## Before you arrive
 

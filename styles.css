@@ -847,67 +847,116 @@ body.portal-active #hide-eyes {
 .contact-grid > div { min-width: 0; }
 .contact-grid a { overflow-wrap: anywhere; }
 
-/* blog */
-#blog-list .post-link {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: #fbf7ec;
-  border: 1.5px solid var(--cream-deep);
-  border-radius: 14px;
-  padding: 0.9rem 1.1rem;
-  margin-bottom: 0.7rem;
-  cursor: pointer;
-  font-family: var(--sans);
-  transition: border-color 0.25s, transform 0.25s;
+/* ---------------- writing: post lists ---------------- */
+.post-index { list-style: none; padding: 0; margin: 0.4rem 0 0; }
+.post-index li {
+  padding: 0.9rem 0;
+  border-bottom: 1.5px dashed var(--cream-deep);
 }
-#blog-list .post-link:hover, #blog-list .post-link:focus-visible {
-  border-color: var(--sage);
-  transform: translateX(4px);
-  outline: none;
-}
-#blog-list .post-title {
+.post-index li:last-child { border-bottom: none; }
+.post-index li > a {
   font-family: var(--serif);
   font-size: 1.08rem;
   font-weight: 600;
   color: var(--redwood-deep);
+  text-decoration: none;
+}
+.post-index li > a:hover, .post-index li > a:focus-visible { text-decoration: underline; }
+.post-index-date {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin: 0.15rem 0 0.3rem;
+}
+.post-index p { font-size: 0.9rem; margin: 0; color: var(--ink); }
+
+/* ---------------- writing: article pages ---------------- */
+body.reading {
+  background: var(--cream);
   display: block;
 }
-#blog-list .post-meta { font-size: 0.78rem; color: var(--ink-soft); display: block; margin: 0.15rem 0 0.3rem; }
-#blog-list .post-summary { font-size: 0.9rem; margin: 0; color: var(--ink); }
-#blog-back {
-  background: none;
-  border: none;
+.article-header { padding: 1.4rem 1.5rem 0; }
+.back-to-room {
+  font-size: 0.88rem;
+  font-weight: 600;
   color: var(--ocean);
-  font-family: var(--sans);
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0 0 0.8rem;
-  font-size: 0.9rem;
+  text-decoration: none;
 }
-#blog-article-body h1 {
+.back-to-room:hover, .back-to-room:focus-visible { text-decoration: underline; }
+.article {
+  max-width: 40rem;           /* comfortable reading measure */
+  margin: 1.2rem auto 2rem;
+  padding: 2rem 1.6rem 2.4rem;
+  background: #fbf7ec;
+  border: 1.5px solid var(--cream-deep);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px -22px rgba(68, 58, 47, 0.4);
+}
+.article h1 {
   font-family: var(--serif);
-  font-weight: 500;
-  font-size: 1.5rem;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
   color: var(--redwood-deep);
-  margin: 0 0 0.2rem;
+  margin: 0 0 0.3rem;
+  line-height: 1.25;
 }
-#blog-article-body .article-date { font-size: 0.8rem; color: var(--ink-soft); margin-bottom: 1rem; }
-#blog-article-body h2, #blog-article-body h3 {
+.article .article-date {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin: 0 0 1.6rem;
+}
+.article h2, .article h3 {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: 1.15rem;
+  font-size: 1.18rem;
   color: var(--sage-deep);
-  margin: 1.4rem 0 0.4rem;
+  margin: 1.8rem 0 0.5rem;
 }
-#blog-article-body p { line-height: 1.7; }
-#blog-article-body blockquote {
-  margin: 1rem 0;
+.article p { line-height: 1.75; }
+.article ul, .article ol { line-height: 1.75; padding-left: 1.2rem; }
+.article li { margin: 0.3rem 0; }
+.article a { color: var(--ocean); overflow-wrap: anywhere; }
+.article img { max-width: 100%; height: auto; border-radius: 12px; }
+.article table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.article th, .article td { padding: 0.5rem 0.4rem; border-bottom: 1.5px dashed var(--cream-deep); text-align: left; }
+.article blockquote {
+  margin: 1.2rem 0;
   padding: 0.2rem 1.2rem;
   border-left: 3px solid var(--sage);
   color: var(--ink-soft);
   font-style: italic;
 }
+.article code {
+  background: var(--cream-deep);
+  padding: 0.1rem 0.35rem;
+  border-radius: 5px;
+  font-size: 0.92em;
+}
+
+/* the "work with me" note at the end of each article */
+.article-cta {
+  margin-top: 2.4rem;
+  padding-top: 1.4rem;
+  border-top: 1.5px solid var(--cream-deep);
+}
+.article-cta h2 { margin-top: 0; }
+.article-cta .btn-primary {
+  display: inline-block;
+  margin-top: 0.5rem;
+  text-decoration: none;
+}
+.article-nav {
+  max-width: 40rem;
+  margin: 0 auto 2rem;
+  padding: 0 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+.article-nav a { color: var(--ocean); text-decoration: none; }
+.article-nav a:hover, .article-nav a:focus-visible { text-decoration: underline; }
+
 
 /* ---------------- footer ---------------- */
 #site-footer {
