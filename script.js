@@ -374,9 +374,17 @@
   const closeBtn = document.getElementById("overlay-close");
   let lastFocus = null;
 
+  let currentPanel = null;
+  const isZh = () => document.documentElement.getAttribute("data-lang") === "zh";
+
   function openPanel(name) {
-    const tpl = document.getElementById("panel-" + name);
+    // in Chinese mode use the translated panel when one exists
+    // (About, Services & Fees, Contact); everything else stays English
+    const tpl =
+      (isZh() && document.getElementById("panel-" + name + "-zh")) ||
+      document.getElementById("panel-" + name);
     if (!tpl) return;
+    currentPanel = name;
     // panels live in the page as real (hidden) DOM so search engines can read
     // them; clone the section's children into the overlay
     lastFocus = document.activeElement;
@@ -405,6 +413,7 @@
     const active = document.activeElement;
     if (active && overlay.contains(active)) active.blur();
     overlay.hidden = true;
+    currentPanel = null;
     document.body.style.overflow = "";
     if (lastFocus && lastFocus.isConnected && lastFocus.getClientRects().length) {
       lastFocus.focus({ preventScroll: true });
@@ -416,6 +425,31 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !overlay.hidden) closePanel();
   });
+
+  /* language toggle: 中 ⇄ 英 — swaps the translated panels, the menu labels
+     and the red-and-gold theme (all keyed off <html data-lang="zh">) */
+  const langToggle = document.getElementById("lang-toggle");
+  function setLang(zh) {
+    const root = document.documentElement;
+    if (zh) root.setAttribute("data-lang", "zh");
+    else root.removeAttribute("data-lang");
+    root.lang = zh ? "zh-Hans" : "en";
+    langToggle.setAttribute(
+      "aria-label",
+      zh ? "Switch to English (切换到英文)" : "切换到中文 (Switch to Chinese)"
+    );
+    try { localStorage.setItem("lang", zh ? "zh" : "en"); } catch (e) {}
+    // re-render an open panel in the new language
+    if (currentPanel && !overlay.hidden) {
+      const keepFocus = lastFocus;
+      openPanel(currentPanel);
+      lastFocus = keepFocus;
+    }
+  }
+  if (langToggle) {
+    langToggle.addEventListener("click", () => setLang(!isZh()));
+    if (isZh()) setLang(true); // sync aria-label with the pre-paint state
+  }
 
   /* hamburger menu */
   const navToggle = document.getElementById("nav-toggle");
@@ -470,24 +504,26 @@
   /* contact form: composes the email and opens the visitor's mail app
      addressed to the practice — nothing is stored or sent to a server */
   content.addEventListener("submit", (e) => {
-    if (e.target.id !== "contact-form") return;
+    const form = e.target;
+    if (!form.classList || !form.classList.contains("contact-form")) return;
     e.preventDefault();
-    const val = (id) => (content.querySelector(id)?.value || "").trim();
-    const name = val("#cf-name");
-    const kind = val("#cf-kind");
+    const val = (n) => ((form.elements[n] && form.elements[n].value) || "").trim();
+    const name = val("name");
+    const kind = val("kind");
     const subject = "Website inquiry — " + kind.toLowerCase() + " therapy" + (name ? " — " + name : "");
     const body =
       "Name: " + (name || "—") +
-      "\nEmail: " + val("#cf-email") +
-      "\nPhone: " + (val("#cf-phone") || "—") +
+      "\nEmail: " + val("email") +
+      "\nPhone: " + (val("phone") || "—") +
       "\nKind of therapy: " + kind +
-      "\n\n" + val("#cf-msg");
+      "\n\n" + val("message");
     window.location.href =
       "mailto:hello@artxutherapy.com?subject=" + encodeURIComponent(subject) +
       "&body=" + encodeURIComponent(body);
-    const btn = e.target.querySelector("button[type=submit]");
-    btn.textContent = "Opening your email app…";
-    setTimeout(() => (btn.textContent = "Send"), 4000);
+    const btn = form.querySelector("button[type=submit]");
+    const label = btn.textContent;
+    btn.textContent = isZh() ? "正在打开邮件应用…" : "Opening your email app…";
+    setTimeout(() => (btn.textContent = label), 4000);
   });
 
   /* Writing is no longer rendered here — posts are real pages at

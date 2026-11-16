@@ -7,6 +7,19 @@ layout: null
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <script>
+    /* apply the saved language before first paint (no flash of the other theme) */
+    (function () {
+      try {
+        var q = new URLSearchParams(location.search).get("lang");
+        var l = q || localStorage.getItem("lang");
+        if (l === "zh") {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        }
+      } catch (e) {}
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Online therapy for complex trauma, attachment, and inner child work with Art Xu, AMFT. Telehealth sessions for clients across California. Free 20-minute consultation." />
   <title>Art Xu, AMFT — A Therapy Room by the Bay</title>
@@ -123,7 +136,7 @@ layout: null
 
   <main id="scene-wrap">
     <div id="room-frame">
-      <p id="room-hint">✦ Click <b>the couch</b> to begin ✦</p>
+      <p id="room-hint"><span class="t-en">✦ Click <b>the couch</b> to begin ✦</span><span class="t-zh" lang="zh-Hans">✦ 点击<b>沙发</b>开始 ✦</span></p>
       <svg id="room" viewBox="0 0 720 900" role="img"
            aria-label="An illustrated therapy office: a curtained window above the couch looking out at the Golden Gate Bridge, a framed diploma, a bookshelf, a plant shelf, a wall calendar, a side table with steaming tea, and a sleeping cat">
         <defs>
@@ -662,13 +675,14 @@ layout: null
 
     </div>
 
+    <button id="lang-toggle" aria-label="切换到中文 (Switch to Chinese)"><span class="t-en" lang="zh-Hans" aria-hidden="true">中</span><span class="t-zh lang-en" lang="en" aria-hidden="true">En</span></button>
     <button id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="icon-nav"></button>
     <nav id="icon-nav" aria-label="Site sections">
-      <button data-panel="about"><span class="nav-icon" aria-hidden="true">📜</span>About</button>
-      <button data-panel="services"><span class="nav-icon" aria-hidden="true">🪴</span>Services &amp; Fees</button>
-      <button data-panel="blog"><span class="nav-icon" aria-hidden="true">📚</span>Writing</button>
-      <button data-panel="resources"><span class="nav-icon" aria-hidden="true">🗂️</span>Resources</button>
-      <button data-panel="contact"><span class="nav-icon" aria-hidden="true">📅</span>Contact</button>
+      <button data-panel="about"><span class="nav-icon" aria-hidden="true">📜</span><span class="t-en">About</span><span class="t-zh" lang="zh-Hans">关于我</span></button>
+      <button data-panel="services"><span class="nav-icon" aria-hidden="true">🪴</span><span class="t-en">Services &amp; Fees</span><span class="t-zh" lang="zh-Hans">服务与收费</span></button>
+      <button data-panel="blog"><span class="nav-icon" aria-hidden="true">📚</span><span class="t-en">Writing</span><span class="t-zh" lang="zh-Hans">文章</span></button>
+      <button data-panel="resources"><span class="nav-icon" aria-hidden="true">🗂️</span><span class="t-en">Resources</span><span class="t-zh" lang="zh-Hans">资源</span></button>
+      <button data-panel="contact"><span class="nav-icon" aria-hidden="true">📅</span><span class="t-en">Contact</span><span class="t-zh" lang="zh-Hans">联系</span></button>
     </nav>
   </main>
 
@@ -761,7 +775,7 @@ layout: null
   <section id="panel-contact">
     <h2 class="panel-title">Contact</h2>
     <p class="lede">"And the day came when the risk to remain tight in a bud was more painful than the risk it took to blossom." - Anaïs Nin</p>
-    <form id="contact-form" novalidate="false">
+    <form id="contact-form" class="contact-form" novalidate="false">
       <label for="cf-name">Name</label>
       <input id="cf-name" name="name" type="text" autocomplete="name" placeholder="First name is fine" />
       <label for="cf-email">Email <span class="req">*</span></label>
@@ -792,6 +806,84 @@ layout: null
       </div>
     </div>
     <p class="fineprint">If you are in crisis, please call or text 988 (Suicide &amp; Crisis Lifeline) — support is available 24/7.</p>
+  </section>
+
+  <!-- ============ 中文版 (Simplified Chinese) panels ============ -->
+  <section id="panel-welcome-zh" lang="zh-Hans">
+    <h2 class="panel-title">请进</h2>
+    <p class="lede">很高兴你来了。</p>
+    <p>你好，我是 Art 👋 ——一名助理婚姻家庭治疗师（AMFT），专注于发展性创伤、依恋修复和内在小孩的重新养育。</p>
+    <p>在房间里随意逛逛，了解我的工作方式：证书、植物、书架和日历都可以点开。请尽情享受。摸摸猫，打开窗户，收拾一下房间，发现一点魔法。</p>
+    <div class="welcome-actions">
+      <button class="btn-primary" data-panel="contact">预约 20 分钟免费咨询</button>
+      <button class="btn-link" data-panel="services">了解我的工作方式 →</button>
+    </div>
+  </section>
+
+  <section id="panel-about-zh" lang="zh-Hans">
+    <h2 class="panel-title">你好，我是 Art。</h2>
+    <img class="me-photo" src="assets/art.jpg" alt="Art Xu，注册助理婚姻家庭治疗师" onerror="this.style.display='none'" />
+    <p>快三十岁的时候，我才意识到自己的心理健康需要帮助。俗话说，人逃不开自己。我确实努力逃过——主要是用工作和各种消遣把自己填满。等到跑累了，我才开始向内看：先是冥想，然后是心理治疗。这个过程令人害怕，也很痛，但总好过麻木。渐渐地，我感受到了那些发自身体深处的反应模式——它们左右着我如何看待自己、如何与他人相处。</p>
+    <p>有一类孩子，因为处境艰难而不得不早早长大：家让人害怕；关爱要靠努力去换，而不是自然得到；自己的需要被拒绝或忽视；为了成为家人需要的样子而丢失了自己。这些描述让我深有共鸣。这样的童年会留下根深蒂固的反应模式。它们住在身体里，体现在我们对待关系的方式中，有时会驱使我们做出伤害自己或身边人的事。</p>
+    <p>这些模式曾经足够好、足够有用，才让我们走到了今天。但它们也意味着关闭了自己的其他部分——而那些部分依然渴望被看见……只要有合适的时间和地方。</p>
+    <p>我也亲身体验过深刻的转变：当这些反应模式所保护的伤口被尊重、被安抚、被爱时，一种生命力会自然地涌现，人也更能为自己做主。对我来说，心理治疗是修复我们与自己的关系，重建我们与生命的连结。</p>
+    <p>我们的咨询可以是这样一个地方：足够安全，可以去回忆，也可以去尝试。无论需要表达的是什么，我们都给予关注和支持——可以通过言语、声音，或者身体的动作。</p>
+    <p>这个房间体现了我对这份工作的理解：从容、温暖、有趣。它不强求，而是腾出空间，让你的神经系统慢慢舒展，并相信它知道自己成长需要什么。</p>
+    <p class="fineprint">注册助理婚姻家庭治疗师（Registered Associate Marriage and Family Therapist）<br/>执照编号：154708<br/>执照持有人：XU, AO<br/>在持照婚姻家庭治疗师的督导下执业</p>
+  </section>
+
+  <section id="panel-services-zh" lang="zh-Hans">
+    <h2 class="panel-title">服务与收费</h2>
+    <ul class="cards">
+      <li><h3>依恋修复</h3><p>处理当依恋需求被触动时出现的强烈身体反应和扭曲的看法。这些模式主要形成于生命最初的两年，大多处于无意识之中，却从根本上影响着我们在与他人的关系中如何体验自己。</p></li>
+      <li><h3>内在小孩的重新养育</h3><p>温柔地去见那些年幼的部分——它们仍在等待有人出现——并给予它们当年没有得到的：被懂得、被安抚、被保护、被喜爱。</p></li>
+      <li><h3>心理剧</h3><p>一种体验式的工作方式，把过去的场景带到当下，让卡住的部分松动开来，有空间流动和转化，并接收当年在那里所需要的东西。</p></li>
+      <li><h3>身体取向练习</h3><p>以身体为基础的觉察与探索（呼吸、扎根、动作、发声、感受），帮助你在当下觉察到战斗、逃跑、讨好或僵住的反应，并让神经系统学会让这股能量流过。</p></li>
+    </ul>
+    <p class="muted">为身在加州任何地方的来访者提供远程视频咨询。</p>
+    <h3 class="fees-heading">收费</h3>
+    <table class="fee-table">
+      <tr><td>个人咨询（50 分钟）</td><td>$150</td></tr>
+      <tr><td>初次咨询（20 分钟，电话）</td><td>免费</td></tr>
+    </table>
+    <p>我为无法负担标准收费的来访者保留了一部分<strong>浮动收费</strong>名额。如果费用是个问题，仍然欢迎联系我，看看我们能否找到可行的办法。</p>
+    <p>我是保险网络外（out-of-network）的服务提供者。我可以每月提供 superbill（费用明细账单）供你向保险公司申请报销，也很乐意为你说明具体流程。</p>
+  </section>
+
+  <section id="panel-contact-zh" lang="zh-Hans">
+    <h2 class="panel-title">联系</h2>
+    <p class="lede" lang="en">"And the day came when the risk to remain tight in a bud was more painful than the risk it took to blossom." - Anaïs Nin</p>
+    <form id="contact-form-zh" class="contact-form" novalidate="false">
+      <label for="cf-name-zh">姓名</label>
+      <input id="cf-name-zh" name="name" type="text" autocomplete="name" placeholder="只写名字也可以" />
+      <label for="cf-email-zh">电子邮箱 <span class="req">*</span></label>
+      <input id="cf-email-zh" name="email" type="email" required autocomplete="email" placeholder="you@email.com" />
+      <label for="cf-phone-zh">电话</label>
+      <input id="cf-phone-zh" name="phone" type="tel" autocomplete="tel" placeholder="选填" />
+      <label for="cf-kind-zh">咨询类型</label>
+      <select id="cf-kind-zh" name="kind">
+        <option value="Individual">个人</option>
+        <option value="Child">儿童</option>
+      </select>
+      <label for="cf-msg-zh">留言</label>
+      <textarea id="cf-msg-zh" name="message" placeholder="一两句话就够了。"></textarea>
+      <div class="form-actions"><button type="submit" class="btn-primary">发送</button></div>
+      <p class="formnote">🔒 点击发送会打开你的邮件应用，并生成一封写给我的邮件——本网站不会保存任何信息。敏感的细节请留到我们交谈时再说。</p>
+    </form>
+    <div class="contact-grid">
+      <div><h3>联系方式</h3>
+        <p>☎ (415) 625-3377<br/>✉ <a href="mailto:hello@artxutherapy.com">hello@artxutherapy.com</a></p>
+        <p class="muted">我会在一个工作日内回复电话和邮件。</p>
+      </div>
+      <div><h3>咨询方式</h3>
+        <p>仅提供远程咨询，通过 Zoom 进行<br/>面向加州各地的来访者</p>
+        <p class="muted">每次咨询前会发送安全的视频链接。</p>
+      </div>
+      <div><h3>时间</h3>
+        <p>周一、周三、周四<br/>上午 10 点 – 下午 6 点</p>
+      </div>
+    </div>
+    <p class="fineprint">如果你正处于危机之中，请拨打或发短信至 988（自杀与危机生命线）——全天 24 小时提供支持。</p>
   </section>
 
   <section id="panel-cat">

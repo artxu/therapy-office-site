@@ -111,6 +111,39 @@ body.nav-open #nav-toggle::before {
   font-size: 1.7rem;
 }
 
+/* language toggle (中 ⇄ 英), sits just left of the hamburger */
+#lang-toggle {
+  position: fixed;
+  top: 1rem;
+  right: calc(1rem + 46px + 0.5rem);
+  z-index: 60;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Songti SC", "Noto Serif SC", "STSong", "SimSun", var(--serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--gate);
+  background: rgba(251, 247, 236, 0.92);
+  backdrop-filter: blur(6px);
+  border: 1.5px solid var(--cream-deep);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px -10px rgba(68, 58, 47, 0.45);
+  cursor: pointer;
+  transition: background 0.25s, transform 0.2s;
+}
+#lang-toggle .lang-en { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; }
+#lang-toggle:hover { background: var(--cream-deep); }
+#lang-toggle:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
+
+/* paired labels: .t-en shows in English mode, .t-zh in Chinese mode */
+.t-zh { display: none; }
+html[data-lang="zh"] .t-zh { display: inline; }
+html[data-lang="zh"] .t-en { display: none; }
+
 /* dropdown menu under the toggle */
 #icon-nav {
   position: fixed;
@@ -796,22 +829,22 @@ body.portal-active #hide-eyes {
 .btn-link:hover, .btn-link:focus-visible { text-decoration: underline; outline: none; }
 
 /* contact form */
-#contact-form {
+.contact-form {
   margin-bottom: 1.6rem;
   padding-bottom: 1.5rem;
   border-bottom: 1.5px dashed var(--cream-deep);
 }
-#contact-form label {
+.contact-form label {
   display: block;
   font-size: 0.8rem;
   font-weight: 700;
   margin: 0.85rem 0 0.3rem;
   color: var(--ink);
 }
-#contact-form .req { color: var(--gate); }
-#contact-form input,
-#contact-form select,
-#contact-form textarea {
+.contact-form .req { color: var(--gate); }
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
   width: 100%;
   padding: 0.6rem 0.8rem;
   border: 1.5px solid var(--cream-deep);
@@ -821,14 +854,14 @@ body.portal-active #hide-eyes {
   background: #fff;
   color: var(--ink);
 }
-#contact-form input:focus,
-#contact-form select:focus,
-#contact-form textarea:focus {
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
   outline: none;
   border-color: var(--sage);
   box-shadow: 0 0 0 4px rgba(122, 147, 118, 0.18);
 }
-#contact-form textarea { min-height: 92px; resize: vertical; }
+.contact-form textarea { min-height: 92px; resize: vertical; }
 .form-actions { margin-top: 1.1rem; }
 .formnote {
   font-size: 0.75rem;
@@ -1024,4 +1057,68 @@ body.reading {
 }
 @media (max-width: 700px) and (prefers-reduced-motion: reduce) {
   .hotspot { animation: none; }
+}
+
+
+/* ============================================================
+   中文版 — festive red & gold theme
+   Active when <html data-lang="zh">. Page chrome is re-tinted
+   through the palette variables; the room's hard-coded SVG
+   colours are remapped with attribute selectors (CSS wins over
+   SVG presentation attributes). Wood, plants, Boston, the view
+   and the portal keep their own colours.
+   ============================================================ */
+html[data-lang="zh"] {
+  --cream: #fbf0d6;
+  --cream-deep: #f0d79c;
+  --ink: #4a2a1c;
+  --ink-soft: #7d5a3c;
+  --redwood: #b9791c;
+  --redwood-deep: #9a5f10;
+  --sage: #c2382b;
+  --sage-deep: #9f2a20;
+  --ocean: #b9791c;
+  --gate: #c62f22;
+  --gold: #e6b23a;
+  --serif: "Bitter", "Songti SC", "Noto Serif SC", "STSong", "SimSun", Georgia, serif;
+  --sans: "Quicksand", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+}
+html[data-lang="zh"] .contact-form input:focus,
+html[data-lang="zh"] .contact-form select:focus,
+html[data-lang="zh"] .contact-form textarea:focus {
+  box-shadow: 0 0 0 4px rgba(194, 56, 43, 0.18);
+}
+/* Chinese text reads better a little looser, without tracking tricks */
+[lang="zh-Hans"] p, [lang="zh-Hans"] li { line-height: 1.85; }
+
+/* walls → warm pale gold */
+html[data-lang="zh"] #room [stop-color="#efe7d7"] { stop-color: #f9e7b8; }
+html[data-lang="zh"] #room [stop-color="#e5dac5"] { stop-color: #f2d48f; }
+/* couch sages → lucky reds */
+html[data-lang="zh"] #room [fill="#7a9376"] { fill: #a8483c; }
+html[data-lang="zh"] #room [fill="#87a084"] { fill: #b85548; }
+html[data-lang="zh"] #room [fill="#8fae8b"] { fill: #c46455; }
+/* ocean blues (pillow, book spines) → golds */
+html[data-lang="zh"] #room [fill="#5b7d8f"] { fill: #e3ab35; }
+html[data-lang="zh"] #room [fill="#4a6a7c"] { fill: #c98d1e; }
+/* terracotta pillow → bright gold */
+html[data-lang="zh"] #room [fill="#c07a4e"] { fill: #f0c24e; }
+/* curtains → red silk with deeper folds */
+html[data-lang="zh"] #room [fill="#cf8a6b"] { fill: #b9503f; }
+html[data-lang="zh"] #room [stroke="#b97a5c"] { stroke: #9a3c2f; }
+/* the bird → jade green, so it stands out against the gold wall */
+html[data-lang="zh"] #room #bird [fill="#5b7d8f"] { fill: #3f9a6c; }
+html[data-lang="zh"] #room #bird [fill="#4a6a7c"] { fill: #2c7a52; }
+/* the rug keeps its English-version colours */
+
+/* phones: two corner buttons no longer fit beside a centred title, so the
+   wordmark moves to the left and leaves the right-hand corner to them */
+@media (max-width: 520px) {
+  #site-header {
+    justify-content: flex-start;
+    text-align: left;
+    padding: 1.1rem calc(1rem + 92px + 1.1rem) 0.7rem 1rem;
+  }
+  .wordmark-name { font-size: 1.3rem; }
+  .wordmark-sub { font-size: 0.66rem; letter-spacing: 0.1em; }
 }
