@@ -1,21 +1,30 @@
 /* ============================================================
-   A Quiet Room by the Bay — Northern California palette
-   redwood · sage · fog cream · ocean · golden-gate red
+   A Quiet Room by the Bay — forest / earth palette
+   moss mist · forest green · rust clay · walnut · mustard
+   (the variable names are historical: --cream is the page
+   ground, --sage the primary accent, --ocean the link colour)
    ============================================================ */
 :root {
-  --cream: #f4eee0;
-  --cream-deep: #e9e0cb;
-  --ink: #443a2f;
-  --ink-soft: #6f6350;
-  --redwood: #b0834b;
-  --redwood-deep: #8f6a3b;
-  --sage: #7a9376;
-  --sage-deep: #5d7f59;
-  --ocean: #5b7d8f;
-  --gate: #c0472b;
-  --gold: #d8b25f;
+  --cream: #edf0e3;
+  --cream-deep: #d6ddc6;
+  --ink: #2f3a2c;
+  --ink-soft: #5a6652;
+  --redwood: #9a6040;
+  --redwood-deep: #7c4a2f;
+  --sage: #5f7f58;
+  --sage-deep: #476443;
+  --ocean: #4f6f52;
+  --gate: #b5522f;
+  --gold: #d2a74a;
+  --paper: #f7f9f0;            /* cards, menu, overlay */
+  --paper-rgb: 247, 249, 240;
+  --panel-border: var(--sage); /* frame of the pop-open panels */
+  --panel-heading: var(--sage-deep);
   --serif: "Bitter", Georgia, serif;
-  --sans: "Quicksand", "Helvetica Neue", Arial, sans-serif;
+  /* Lato is loaded from Google Fonts (regular, italic, bold). If it fails
+     to load: Helvetica Neue / Arial are the closest in width on Mac and
+     Windows, then the device default (Roboto on Android). */
+  --sans: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -26,8 +35,7 @@ body {
   background: var(--cream);
   color: var(--ink);
   font-family: var(--sans);
-  /* Quicksand runs light at 400 — 500 gives the body a fuller line */
-  font-weight: 500;
+  font-weight: 400;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -66,7 +74,7 @@ body {
   z-index: 4;
   margin: 0;
   white-space: nowrap;
-  background: rgba(251, 247, 236, 0.92);
+  background: rgba(var(--paper-rgb), 0.92);
   border: 1.5px solid var(--cream-deep);
   border-radius: 999px;
   padding: 0.5rem 1.2rem;
@@ -90,7 +98,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(251, 247, 236, 0.92);
+  background: rgba(var(--paper-rgb), 0.92);
   backdrop-filter: blur(6px);
   border: 1.5px solid var(--cream-deep);
   border-radius: 12px;
@@ -127,7 +135,7 @@ body.nav-open #nav-toggle::before {
   font-weight: 700;
   line-height: 1;
   color: var(--gate);
-  background: rgba(251, 247, 236, 0.92);
+  background: rgba(var(--paper-rgb), 0.92);
   backdrop-filter: blur(6px);
   border: 1.5px solid var(--cream-deep);
   border-radius: 12px;
@@ -155,7 +163,7 @@ html[data-lang="zh"] .t-en { display: none; }
   gap: 0.15rem;
   min-width: 190px;
   padding: 0.4rem;
-  background: rgba(251, 247, 236, 0.97);
+  background: rgba(var(--paper-rgb), 0.97);
   backdrop-filter: blur(6px);
   border: 1.5px solid var(--cream-deep);
   border-radius: 14px;
@@ -651,7 +659,7 @@ body.portal-active #hide-eyes {
   overflow-y: auto;
   background: var(--cream);
   border-radius: 20px;
-  border: 3px solid var(--redwood);
+  border: 3px solid var(--panel-border);
   box-shadow: 0 30px 80px -20px rgba(40, 30, 20, 0.55);
   padding: 2.2rem 2.4rem 2rem;
   animation: cardin 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.05);
@@ -679,24 +687,27 @@ body.portal-active #hide-eyes {
   font-weight: 500;
   font-size: 1.9rem;
   margin: 0 0 0.4rem;
-  color: var(--redwood-deep);
+  color: var(--panel-heading);
 }
 #overlay-card h3 {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   margin: 0 0 0.3rem;
   color: var(--sage-deep);
 }
+/* body text base: 18px in the panels and on article pages
+   (headings, menu and the room's own labels stay at their sizes) */
+#overlay-content, .article { font-size: 1.125rem; }
 #overlay-card p { line-height: 1.65; }
 .lede {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.08rem;
+  font-size: 1.2rem;
   color: var(--ink-soft);
   margin-top: 0;
 }
-.muted { color: var(--ink-soft); font-size: 0.9rem; }
+.muted { color: var(--ink-soft); font-size: 1rem; }
 
 /* Boston's photo, above the text in his panel */
 .cat-photo {
@@ -723,7 +734,7 @@ body.portal-active #hide-eyes {
   box-shadow: 0 10px 26px -14px rgba(40, 30, 20, 0.55);
 }
 .fineprint {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: var(--ink-soft);
   border-top: 1px solid var(--cream-deep);
   padding-top: 0.8rem;
@@ -739,12 +750,12 @@ body.portal-active #hide-eyes {
   gap: 0.9rem;
 }
 .cards li {
-  background: #fbf7ec;
+  background: var(--paper);
   border: 1.5px solid var(--cream-deep);
   border-radius: 14px;
   padding: 1rem 1.1rem;
 }
-.cards li p { margin: 0; font-size: 0.92rem; line-height: 1.55; }
+.cards li p { margin: 0; font-size: 1.03rem; line-height: 1.55; }
 /* full-width cards, one per row (Client Resources) */
 .cards.cards-full { grid-template-columns: 1fr; }
 
@@ -759,7 +770,7 @@ body.portal-active #hide-eyes {
   width: 100%;
   border-collapse: collapse;
   margin: 0.6rem 0 1rem;
-  font-size: 1rem;
+  font-size: 1.125rem;
 }
 .fee-table td {
   padding: 0.65rem 0.4rem;
@@ -769,7 +780,7 @@ body.portal-active #hide-eyes {
   text-align: right;
   font-family: var(--serif);
   font-weight: 600;
-  color: var(--redwood-deep);
+  color: var(--panel-heading);
 }
 
 /* crumpled-note quotes */
@@ -785,7 +796,7 @@ body.portal-active #hide-eyes {
 }
 .quote-by {
   color: var(--ink-soft);
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin: 0;
 }
 
@@ -818,7 +829,7 @@ body.portal-active #hide-eyes {
 }
 .btn-link {
   font-family: var(--sans);
-  font-size: 0.92rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--ocean);
   background: none;
@@ -836,7 +847,7 @@ body.portal-active #hide-eyes {
 }
 .contact-form label {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 700;
   margin: 0.85rem 0 0.3rem;
   color: var(--ink);
@@ -850,7 +861,7 @@ body.portal-active #hide-eyes {
   border: 1.5px solid var(--cream-deep);
   border-radius: 10px;
   font-family: inherit;
-  font-size: 0.92rem;
+  font-size: 1.03rem;
   background: #fff;
   color: var(--ink);
 }
@@ -864,7 +875,7 @@ body.portal-active #hide-eyes {
 .contact-form textarea { min-height: 92px; resize: vertical; }
 .form-actions { margin-top: 1.1rem; }
 .formnote {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   color: var(--ink-soft);
   margin-top: 0.7rem;
 }
@@ -889,19 +900,19 @@ body.portal-active #hide-eyes {
 .post-index li:last-child { border-bottom: none; }
 .post-index li > a {
   font-family: var(--serif);
-  font-size: 1.08rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  color: var(--redwood-deep);
+  color: var(--panel-heading);
   text-decoration: none;
 }
 .post-index li > a:hover, .post-index li > a:focus-visible { text-decoration: underline; }
 .post-index-date {
   display: block;
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   color: var(--ink-soft);
   margin: 0.15rem 0 0.3rem;
 }
-.post-index p { font-size: 0.9rem; margin: 0; color: var(--ink); }
+.post-index p { font-size: 1.125rem; margin: 0; color: var(--ink); }
 
 /* ---------------- writing: article pages ---------------- */
 body.reading {
@@ -910,7 +921,7 @@ body.reading {
 }
 .article-header { padding: 1.4rem 1.5rem 0; }
 .back-to-room {
-  font-size: 0.88rem;
+  font-size: 1rem; /* 16px: two below the 18px body text */
   font-weight: 600;
   color: var(--ocean);
   text-decoration: none;
@@ -920,7 +931,7 @@ body.reading {
   max-width: 40rem;           /* comfortable reading measure */
   margin: 1.2rem auto 2rem;
   padding: 2rem 1.6rem 2.4rem;
-  background: #fbf7ec;
+  background: var(--paper);
   border: 1.5px solid var(--cream-deep);
   border-radius: 18px;
   box-shadow: 0 18px 40px -22px rgba(68, 58, 47, 0.4);
@@ -929,28 +940,30 @@ body.reading {
   font-family: var(--serif);
   font-weight: 600;
   font-size: clamp(1.5rem, 3.4vw, 2rem);
-  color: var(--redwood-deep);
+  color: var(--ink); /* same as the "Art's Therapy Office" wordmark */
   margin: 0 0 0.3rem;
   line-height: 1.25;
 }
 .article .article-date {
-  font-size: 0.82rem;
+  font-size: 0.92rem;
   color: var(--ink-soft);
   margin: 0 0 1.6rem;
 }
 .article h2, .article h3 {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: 1.18rem;
+  font-size: 1.22rem;          /* 19.5px, just above the 18px body */
   color: var(--sage-deep);
-  margin: 1.8rem 0 0.5rem;
+  margin: 1.5rem 0 0.25rem;    /* more air above than below: the heading belongs to what follows */
 }
+/* the paragraph or list right after a heading sits close to it */
+.article h2 + *, .article h3 + * { margin-top: 0; }
 .article p { line-height: 1.75; }
 .article ul, .article ol { line-height: 1.75; padding-left: 1.2rem; }
 .article li { margin: 0.3rem 0; }
 .article a { color: var(--ocean); overflow-wrap: anywhere; }
 .article img { max-width: 100%; height: auto; border-radius: 12px; }
-.article table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.article table { width: 100%; border-collapse: collapse; font-size: 1.06rem; }
 .article th, .article td { padding: 0.5rem 0.4rem; border-bottom: 1.5px dashed var(--cream-deep); text-align: left; }
 .article blockquote {
   margin: 1.2rem 0;
@@ -967,17 +980,6 @@ body.reading {
 }
 
 /* the "work with me" note at the end of each article */
-.article-cta {
-  margin-top: 2.4rem;
-  padding-top: 1.4rem;
-  border-top: 1.5px solid var(--cream-deep);
-}
-.article-cta h2 { margin-top: 0; }
-.article-cta .btn-primary {
-  display: inline-block;
-  margin-top: 0.5rem;
-  text-decoration: none;
-}
 .article-nav {
   max-width: 40rem;
   margin: 0 auto 2rem;
@@ -985,7 +987,7 @@ body.reading {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 .article-nav a { color: var(--ocean); text-decoration: none; }
 .article-nav a:hover, .article-nav a:focus-visible { text-decoration: underline; }
@@ -1065,8 +1067,8 @@ body.reading {
    Active when <html data-lang="zh">. Page chrome is re-tinted
    through the palette variables; the room's hard-coded SVG
    colours are remapped with attribute selectors (CSS wins over
-   SVG presentation attributes). Wood, plants, Boston, the view
-   and the portal keep their own colours.
+   SVG presentation attributes). Curtains, rug, floor, wood, plants,
+   Boston, the view and the portal keep the colours drawn in the SVG.
    ============================================================ */
 html[data-lang="zh"] {
   --cream: #fbf0d6;
@@ -1080,8 +1082,12 @@ html[data-lang="zh"] {
   --ocean: #b9791c;
   --gate: #c62f22;
   --gold: #e6b23a;
+  --paper: #fbf7ec;
+  --paper-rgb: 251, 247, 236;
+  --panel-border: var(--redwood);
+  --panel-heading: var(--redwood-deep);
   --serif: "Bitter", "Songti SC", "Noto Serif SC", "STSong", "SimSun", Georgia, serif;
-  --sans: "Quicksand", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+  --sans: "Lato", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
 }
 html[data-lang="zh"] .contact-form input:focus,
 html[data-lang="zh"] .contact-form select:focus,
@@ -1103,9 +1109,7 @@ html[data-lang="zh"] #room [fill="#5b7d8f"] { fill: #e3ab35; }
 html[data-lang="zh"] #room [fill="#4a6a7c"] { fill: #c98d1e; }
 /* terracotta pillow → bright gold */
 html[data-lang="zh"] #room [fill="#c07a4e"] { fill: #f0c24e; }
-/* curtains → red silk with deeper folds */
-html[data-lang="zh"] #room [fill="#cf8a6b"] { fill: #b9503f; }
-html[data-lang="zh"] #room [stroke="#b97a5c"] { stroke: #9a3c2f; }
+/* curtains keep their own colour */
 /* the bird → jade green, so it stands out against the gold wall */
 html[data-lang="zh"] #room #bird [fill="#5b7d8f"] { fill: #3f9a6c; }
 html[data-lang="zh"] #room #bird [fill="#4a6a7c"] { fill: #2c7a52; }
@@ -1122,3 +1126,37 @@ html[data-lang="zh"] #room #bird [fill="#4a6a7c"] { fill: #2c7a52; }
   .wordmark-name { font-size: 1.3rem; }
   .wordmark-sub { font-size: 0.66rem; letter-spacing: 0.1em; }
 }
+
+
+/* ============================================================
+   Forest / earth room (default, English version)
+   The SVG keeps its original drawn colours as attributes; these
+   rules re-tint them. Scoped away from the Chinese version, which
+   applies its own red-and-gold remap to the same attributes.
+   Wooden furniture, plants, Boston and the view are left exactly
+   as drawn.
+   ============================================================ */
+/* walls → moss mist */
+html:not([data-lang="zh"]) #room [stop-color="#efe7d7"] { stop-color: #e0e6d2; }
+html:not([data-lang="zh"]) #room [stop-color="#e5dac5"] { stop-color: #ccd6bb; }
+/* floor → walnut */
+html:not([data-lang="zh"]) #room [stop-color="#d7b985"] { stop-color: #b39064; }
+html:not([data-lang="zh"]) #room [stop-color="#c9a874"] { stop-color: #9c7a50; }
+/* couch → rust clay */
+html:not([data-lang="zh"]) #room [fill="#7a9376"] { fill: #a55d3e; }
+html:not([data-lang="zh"]) #room [fill="#87a084"] { fill: #b76c4a; }
+html:not([data-lang="zh"]) #room [fill="#8fae8b"] { fill: #c67c59; }
+/* blue pillow and book spines → forest green */
+html:not([data-lang="zh"]) #room [fill="#5b7d8f"] { fill: #4f6f52; }
+html:not([data-lang="zh"]) #room [fill="#4a6a7c"] { fill: #3d5a41; }
+/* terracotta pillow → mustard */
+html:not([data-lang="zh"]) #room [fill="#c07a4e"] { fill: #d2a74a; }
+/* rug → moss and lichen */
+html:not([data-lang="zh"]) #room [fill="#c98f6f"] { fill: #8b9a68; }
+html:not([data-lang="zh"]) #room [fill="#dcb197"] { fill: #cdd3aa; }
+/* curtains → moss green, between the rug's light and dark bands */
+html:not([data-lang="zh"]) #room [fill="#cf8a6b"] { fill: #9dab75; }
+html:not([data-lang="zh"]) #room [stroke="#b97a5c"] { stroke: #82905c; }
+/* the bird keeps its original blue (it shares a fill with the pillow) */
+html:not([data-lang="zh"]) #room #bird [fill="#5b7d8f"] { fill: #5b7d8f; }
+html:not([data-lang="zh"]) #room #bird [fill="#4a6a7c"] { fill: #4a6a7c; }
