@@ -959,7 +959,10 @@ body.reading {
 /* the paragraph or list right after a heading sits close to it */
 .article h2 + *, .article h3 + * { margin-top: 0; }
 .article p { line-height: 1.75; }
-.article ul, .article ol { line-height: 1.75; padding-left: 1.2rem; }
+.article ul, .article ol { line-height: 1.75; padding-left: 1.2rem; margin: 0; }
+/* a list sits single-spaced against the text before and after it */
+.article p:has(+ ul), .article p:has(+ ol) { margin-bottom: 0; }
+.article ul + p, .article ol + p { margin-top: 0; }
 .article li { margin: 0.3rem 0; }
 .article a { color: var(--ocean); overflow-wrap: anywhere; }
 .article img { max-width: 100%; height: auto; border-radius: 12px; }
